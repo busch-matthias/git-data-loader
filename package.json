@@ -1,0 +1,14 @@
+{
+  "name": "git-data-loader",
+  "version": "1.0.0",
+  "description": "creates repository models ",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "learning"
+  ],
+  "author": "Matthias Busch",
+  "license": "ISC"
+}
