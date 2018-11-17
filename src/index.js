@@ -15,6 +15,10 @@ const fs = require('fs');
 async function paginate(method, args) {
     let response = await method({ per_page: 100, ...args })
     let { data } = response
+    console.info(Object.getOwnPropertyNames(data))
+    for (prop in data){
+        console.info('Shit has propertie'+ prop)
+    }
     while (octokit.hasNextPage(response)) {
         response = await octokit.getNextPage(response)
         data = data.concat(response.data)
@@ -22,12 +26,23 @@ async function paginate(method, args) {
     return data
 }
 
-paginate(octokit.repos.getForOrg,{org: 'octokit', type: 'public'})
+// could be that we need application/vnd.github.mercy-preview+json
+paginate(octokit.search.topics,{
+    q: 'is:curated repositories:>20',
+  }).then(data => {
+      let string = JSON.stringify(data, null, 2);
+      fs.writeFile('search.json', string, (err) => {
+          if (err) throw err;
+          console.log('complete search');
+      })
+
+  })
+/*paginate(octokit.repos.getForOrg,{org: 'octokit', type: 'public'})
     .then(data => {
         let string = JSON.stringify(data,null,2);
         fs.writeFile('result.json', string, (err) => {
             if (err) throw err;
-            console.log('complete');
+            console.log('complete getOrg');
         })
     })
-    
+*/
