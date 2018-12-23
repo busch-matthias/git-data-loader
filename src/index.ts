@@ -13,10 +13,8 @@ main();
 
 //https://octokit.github.io/rest.js
 async function main(): Promise<any> {
-    const result = await gitApi.repos.list({per_page:100, affiliation: 'owner'})
-    console.log(result.data)
-    console.log(`All in all we have ${result.data.length} Repositories`)
-    console.log('also note :' +JSON.stringify(result.headers, null, 4))
+   const repoUrls = await gitApi.repos.listPublic({})
+   console.log(repoUrls);
 }
 
 async function getRepositoryModel(repoUrl :string): Promise<any> {

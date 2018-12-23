@@ -9,23 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Octokit = require("@octokit/rest");
-const octokit = new Octokit();
-// Compare: https://developer.github.com/v3/repos/#list-organization-repositories
-/*octokit.repos.getForOrg({
-    org: 'octokit',
-    type: 'public'
-}).then(({ data, headers, status }) => {
-    // handle data
-    console.info('status:' + JSON.stringify(status, null, 2))
-    console.info('headers:' + JSON.stringify(headers, null, 2))
-    console.info('data:' + JSON.stringify(data, null, 2))
-})*/
+const environment_1 = require("./environment");
+const gitApi = new Octokit();
+gitApi.authenticate({
+    type: 'token',
+    token: environment_1.config.GIT_TOKEN
+});
 main();
+//https://octokit.github.io/rest.js
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
+        const repoUrls = yield gitApi.repos.listPublic({});
+        console.log(repoUrls);
     });
 }
-function getRepositoryModel() {
+function getRepositoryModel(repoUrl) {
     return __awaiter(this, void 0, void 0, function* () {
     });
 }
