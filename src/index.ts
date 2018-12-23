@@ -1,28 +1,24 @@
-import * as fs from 'fs';
-
-import { paginate } from './util';
-import { RepositoryModel } from './model';
-
 import * as Octokit from '@octokit/rest';
 
-const octokit = new Octokit();
+import {config} from './environment'
 
-// Compare: https://developer.github.com/v3/repos/#list-organization-repositories
-/*octokit.repos.getForOrg({
-    org: 'octokit',
-    type: 'public'
-}).then(({ data, headers, status }) => {
-    // handle data
-    console.info('status:' + JSON.stringify(status, null, 2))
-    console.info('headers:' + JSON.stringify(headers, null, 2))
-    console.info('data:' + JSON.stringify(data, null, 2))
-})*/
+const gitApi = new Octokit()
+gitApi.authenticate({
+    type: 'token',
+    token: config.GIT_TOKEN
+})
+
+
 main();
 
-async function main(): Promise<any>{
-
+//https://octokit.github.io/rest.js
+async function main(): Promise<any> {
+    const result = await gitApi.repos.list({per_page:100, affiliation: 'owner'})
+    console.log(result.data)
+    console.log(`All in all we have ${result.data.length} Repositories`)
+    console.log('also note :' +JSON.stringify(result.headers, null, 4))
 }
 
-async function getRepositoryModel():Promise<any>{
-
+async function getRepositoryModel(repoUrl :string): Promise<any> {
+  
 }
