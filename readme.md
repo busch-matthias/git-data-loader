@@ -1,6 +1,6 @@
 ## TODO
-https://octokit.github.io/rest.js/#api-Repos-listTopics
-https://developer.github.com/v3/repos/#get
+ * https://octokit.github.io/rest.js/#api-Repos-listTopics
+ * https://developer.github.com/v3/repos/#get
 
 ## Installation of the project 
 ### 1. Git Clone
