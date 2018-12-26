@@ -1,3 +1,7 @@
+## Notes
+ * https://github.com/octokit/rest.js#custom-requests
+ * 
+
 ## Installation of the project 
 ### 1. Git Clone
 ```

@@ -1,14 +1,15 @@
 export interface RepositoryModel{
+    owner: string;
     name: string;
-    contributers : Contributer[];
-    topics: string[];
-    mainLanguage: string;
-    usedLanguages: LanguageUsage[];
-    sizeInBytes: number;
-    createdAt: string;
-    livetimeInDays: number;
-    updatedAt: string;
-    forkCount: number;
+    contributers? : Contributer[];
+    topics?: string[];
+    mainLanguage?: string;
+    usedLanguages?: LanguageUsage[];
+    sizeInBytes?: number;
+    createdAt?: string;
+    livetimeInDays?: number;
+    updatedAt?: string;
+    forkCount?: number;
 
 }
 export interface LanguageUsage{
