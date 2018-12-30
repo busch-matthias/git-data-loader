@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "init-env": "cp .example.env .env",
-    "start": "nodemon --delay 5 --watch src --nolazy --exec node -r ts-node/register src/index.ts",
-    "build": "tsc -p .",
+    "watch": "nodemon --delay 5 --watch src --nolazy --exec node -r ts-node/register src/index.ts",
+    "go": "npm run build && node dist/index.js",
+    "build": "npm run clean && tsc -p .",
     "clean": "rm -rf dist",
+    "limit": "npm run build && node dist/index.js --justShow",
     "test": "jest"
   },
   "keywords": [
