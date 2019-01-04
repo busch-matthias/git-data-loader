@@ -5,7 +5,7 @@ import * as Octokit from '@octokit/rest';
 
 import { config } from './environment'
 
-import { crawlRepositories, createAllRepositoriesById } from './repos'
+import { crawlRepositories, CrawlResult } from './repos'
 import { RepositoryModel, RepoIdentifier } from './model'
 import { showLimits } from './showlimit'
 import { Configuration } from 'tslint';
@@ -28,7 +28,7 @@ const DEFAULT_CONFIG: FullConfiguration = {
     statiticsFile: 'stats.json',
 
     inputFolder: 'repo_input',
-    inputFile: 'repositories.json',
+    inputFile: 'repos.json',
     todoFile: 'todo.json',
 }
 
@@ -48,9 +48,12 @@ main();
 
 async function main() {
     let args = process.argv || []
-    
+
     if (args.includes('--justShow') || args.includes('justShow')) {
         showLimits(gitApi);
+    } else if (args.includes('--justInput') || args.includes('justInput')) {
+        await generateInputFile(gitApi);
+
     } else {
 
         await loadRepositories();
@@ -58,29 +61,59 @@ async function main() {
 
     }
 }
-
+export async function generateInputFile(gitApi: Octokit, config: Configuration = {}): Promise<void> {
+    let fullConfig = { ...DEFAULT_CONFIG, ...config }
+}
 export async function loadRepositories(config: Configuration = {}): Promise<CrawlResult> {
     let fullConfig = { ...DEFAULT_CONFIG, ...config }
 
-    const repoIds = await loadTodoList(gitApi, fullConfig);
+    const repoIds = await loadTodoList(fullConfig);
 
-    const {repoModels, crawlResult} = await crawlRepositories(repoIds, gitApi);
+    const crawlResult = await crawlRepositories(repoIds, gitApi);
 
-    await saveResults(repoModels, fullConfig);
+    await saveResults(crawlResult, fullConfig);
+    
+    if (!crawlResult.isFinished()) {
+        console.info("Cralw was not finished in one run")
+        await saveTodos(crawlResult, fullConfig);
+    }
     return crawlResult;
 }
 
-async function loadTodoList(gitApi: Octokit, config: FullConfiguration): Promise<Array<RepoIdentifier>> {
-    return null
+async function loadTodoList(config: FullConfiguration): Promise<Array<RepoIdentifier>> {
+    const inputPath :string = path.join(config.inputFolder, config.inputFile);
+    const todoPath :string = path.join(config.inputFolder, config.todoFile);
+    if (fs.existsSync(todoPath)) {
+        console.info(">>>ERROR! can not read from todo-File at the moment");
+    } else {
+        if (!fs.existsSync(inputPath)) {
+            console.info(">>>ERROR! No input file specified");
+        }
+        let content  = fs.readFileSync(inputPath);
+        const input: Array<RepoIdentifier> = JSON.parse(content.toString());
+        console.log("We have "+ input.length+" repos to read")
+        return input;
+    }
+    return [];
 }
-async function saveResults(repoModels: Array<RepositoryModel>, config: FullConfiguration): Promise<any> {
+async function saveResults(cralwResult: CrawlResult, config: FullConfiguration): Promise<void> {
 
     if (!fs.existsSync(config.outputFolder)) {
         fs.mkdirSync(config.outputFolder)
     }
+    const repoModels = cralwResult.loadedRepos;
     const outputPath = path.join(config.outputFolder, config.outputFile);
-    const output = JSON.stringify(repoModels, null, 2);
+    const output = JSON.stringify(repoModels);
 
     await fs.promises.appendFile(outputPath, output);
 }
 
+async function saveTodos(cralwResult: CrawlResult, config: FullConfiguration): Promise<void>{
+    if (!fs.existsSync(config.outputFolder)) {
+        fs.mkdirSync(config.outputFolder)
+    }
+    const todoPath= path.join(config.outputFolder, config.todoFile);
+    const todoOutput = JSON.stringify(cralwResult.todoRepos)
+    
+    await fs.promises.writeFile(todoPath, todoOutput);
+}

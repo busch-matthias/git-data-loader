@@ -20,16 +20,17 @@ export interface LanguageUsage{
     sizeInBytes: number;
 }
 
-export interface RepoByName{
+export class RepoByName{
     repository: string;
     owner: string
 }
-export interface RepoById{
+export class RepoById{
     id: number
 }
 export type RepoIdentifier = RepoById | RepoByName;
 
 export interface Contributer{
+    
     name: string;
     class?: ContributerClass;
 }
