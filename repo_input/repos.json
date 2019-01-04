@@ -1,4 +1,8 @@
 [
+    { 
+        "owner": "octokit",
+        "repository":"octokit.rb"
+    },
     {
         "owner": "mojombo",
         "repository": "grit"

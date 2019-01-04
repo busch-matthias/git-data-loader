@@ -1,7 +1,7 @@
 export interface RepositoryModel{
     id: number;
     owner: string;
-    ownerId: number;
+    //ownerId: string;
     name: string;
     fullRepoName: string;
     contributers : Contributer[];
@@ -20,18 +20,15 @@ export interface LanguageUsage{
     sizeInBytes: number;
 }
 
-export class RepoByName{
+export class RepoIdentifier{
     repository: string;
     owner: string
 }
-export class RepoById{
-    id: number
-}
-export type RepoIdentifier = RepoById | RepoByName;
 
 export interface Contributer{
     
     name: string;
+    totalSize: number;
     class?: ContributerClass;
 }
 

@@ -9,6 +9,7 @@ import { crawlRepositories, CrawlResult } from './repos'
 import { RepositoryModel, RepoIdentifier } from './model'
 import { showLimits } from './showlimit'
 import { Configuration } from 'tslint';
+import { consoleTestResultHandler } from 'tslint/lib/test';
 interface FullConfiguration {
     outputFile: string;
     outputFolder: string;
@@ -35,7 +36,7 @@ const DEFAULT_CONFIG: FullConfiguration = {
 const gitApi = new Octokit({
     headers: {
         'Time-Zone': 'Europe/Amsterdam',
-        'Accept': 'application/vnd.github.mercy-preview+json'
+        'Accept': 'application/vnd.github.mercy-preview+json, application/vnd.github.mercy-preview+json'
     }
 })
 
@@ -101,9 +102,12 @@ async function saveResults(cralwResult: CrawlResult, config: FullConfiguration):
     if (!fs.existsSync(config.outputFolder)) {
         fs.mkdirSync(config.outputFolder)
     }
-    const repoModels = cralwResult.loadedRepos;
+
     const outputPath = path.join(config.outputFolder, config.outputFile);
-    const output = JSON.stringify(repoModels);
+    const output = JSON.stringify(cralwResult.loadedRepos,null,2);
+
+    console.info("<<====>>>>><<<<<<<<>>>>>>><<<<<<====>>")
+    console.info("we saved " + cralwResult.loadedRepos.length + " repos");
 
     await fs.promises.appendFile(outputPath, output);
 }
@@ -113,7 +117,9 @@ async function saveTodos(cralwResult: CrawlResult, config: FullConfiguration): P
         fs.mkdirSync(config.outputFolder)
     }
     const todoPath= path.join(config.outputFolder, config.todoFile);
-    const todoOutput = JSON.stringify(cralwResult.todoRepos)
-    
+    const todoOutput = JSON.stringify(cralwResult.todoRepos,null,2)
+    console.info("<<====>>>>><<<<<<<<>>>>>>><<<<<<====>>")
+    console.info("we have still " + cralwResult.todoRepos.length + " repos todo");
+
     await fs.promises.writeFile(todoPath, todoOutput);
 }
