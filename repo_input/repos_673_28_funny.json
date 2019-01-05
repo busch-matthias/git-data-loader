@@ -1,0 +1,2806 @@
+[
+    {
+        "owner": "octokit",
+        "repository": "octokit.rb"
+    },
+    {
+        "owner": "mojombo",
+        "repository": "grit"
+    },
+    {
+        "repository": "dm",
+        "owner": "reinh"
+    },
+    {
+        "owner": "wycats",
+        "repository": "merb-core"
+    },
+    {
+        "owner": "rubinius",
+        "repository": "rubinius"
+    },
+    {
+        "owner": "mojombo",
+        "repository": "god"
+    },
+    {
+        "owner": "vanpelt",
+        "repository": "jsawesome"
+    },
+    {
+        "owner": "wycats",
+        "repository": "jspec"
+    },
+    {
+        "owner": "defunkt",
+        "repository": "exception_logger"
+    },
+    {
+        "owner": "defunkt",
+        "repository": "ambition"
+    },
+    {
+        "owner": "technoweenie",
+        "repository": "restful-authentication"
+    },
+    {
+        "owner": "technoweenie",
+        "repository": "attachment_fu"
+    },
+    {
+        "owner": "Caged",
+        "repository": "microsis"
+    },
+    {
+        "owner": "anotherjesse",
+        "repository": "s3"
+    },
+    {
+        "owner": "anotherjesse",
+        "repository": "taboo"
+    },
+    {
+        "owner": "anotherjesse",
+        "repository": "foxtracs"
+    },
+    {
+        "owner": "anotherjesse",
+        "repository": "fotomatic"
+    },
+    {
+        "owner": "mojombo",
+        "repository": "glowstick"
+    },
+    {
+        "owner": "defunkt",
+        "repository": "starling"
+    },
+    {
+        "owner": "wycats",
+        "repository": "merb-more"
+    },
+    {
+        "owner": "macournoyer",
+        "repository": "thin"
+    },
+    {
+        "owner": "jamesgolick",
+        "repository": "resource_controller"
+    },
+    {
+        "owner": "jamesgolick",
+        "repository": "markaby"
+    },
+    {
+        "owner": "jamesgolick",
+        "repository": "enum_field"
+    },
+    {
+        "owner": "defunkt",
+        "repository": "subtlety"
+    },
+    {
+        "owner": "defunkt",
+        "repository": "zippy"
+    },
+    {
+        "owner": "defunkt",
+        "repository": "cache_fu"
+    },
+    {
+        "owner": "KirinDave",
+        "repository": "phosphor"
+    },
+    {
+        "owner": "bmizerany",
+        "repository": "sinatra"
+    },
+    {
+        "owner": "jnewland",
+        "repository": "gsa-prototype"
+    },
+    {
+        "owner": "technoweenie",
+        "repository": "duplikate"
+    },
+    {
+        "owner": "jnewland",
+        "repository": "lazy_record"
+    },
+    {
+        "owner": "jnewland",
+        "repository": "gsa-feeds"
+    },
+    {
+        "owner": "jnewland",
+        "repository": "votigoto"
+    },
+    {
+        "owner": "defunkt",
+        "repository": "mofo"
+    },
+    {
+        "owner": "jnewland",
+        "repository": "xhtmlize"
+    },
+    {
+        "owner": "ruby-git",
+        "repository": "ruby-git"
+    },
+    {
+        "owner": "ezmobius",
+        "repository": "bmhsearch"
+    },
+    {
+        "owner": "uggedal",
+        "repository": "mofo"
+    },
+    {
+        "owner": "mmower",
+        "repository": "simply_versioned"
+    },
+    {
+        "owner": "abhay",
+        "repository": "gchart"
+    },
+    {
+        "owner": "benburkert",
+        "repository": "schemr"
+    },
+    {
+        "owner": "abhay",
+        "repository": "calais"
+    },
+    {
+        "owner": "mojombo",
+        "repository": "chronic"
+    },
+    {
+        "owner": "sr",
+        "repository": "git-wiki"
+    },
+    {
+        "owner": "queso",
+        "repository": "signal-wiki"
+    },
+    {
+        "owner": "drnic",
+        "repository": "ruby-on-rails-tmbundle"
+    },
+    {
+        "owner": "danwrong",
+        "repository": "low-pro-for-jquery"
+    },
+    {
+        "owner": "wayneeseguin",
+        "repository": "merb-core"
+    },
+    {
+        "owner": "sr",
+        "repository": "dst"
+    },
+    {
+        "owner": "mojombo",
+        "repository": "yaws"
+    },
+    {
+        "owner": "KirinDave",
+        "repository": "yaws"
+    },
+    {
+        "owner": "sr",
+        "repository": "tasks"
+    },
+    {
+        "owner": "mattetti",
+        "repository": "ruby-on-rails-tmbundle"
+    },
+    {
+        "owner": "grempe",
+        "repository": "amazon-ec2"
+    },
+    {
+        "owner": "wayneeseguin",
+        "repository": "merblogger"
+    },
+    {
+        "owner": "wayneeseguin",
+        "repository": "merbtastic"
+    },
+    {
+        "owner": "wayneeseguin",
+        "repository": "alogr"
+    },
+    {
+        "owner": "wayneeseguin",
+        "repository": "autozest"
+    },
+    {
+        "owner": "wayneeseguin",
+        "repository": "rnginx"
+    },
+    {
+        "owner": "wayneeseguin",
+        "repository": "sequel"
+    },
+    {
+        "owner": "bmizerany",
+        "repository": "simply_versioned"
+    },
+    {
+        "owner": "peterc",
+        "repository": "switchpipe"
+    },
+    {
+        "owner": "hornbeck",
+        "repository": "arc"
+    },
+    {
+        "owner": "up_the_irons",
+        "repository": "ebay4r"
+    },
+    {
+        "owner": "wycats",
+        "repository": "merb-plugins"
+    },
+    {
+        "owner": "up_the_irons",
+        "repository": "ram"
+    },
+    {
+        "owner": "defunkt",
+        "repository": "ambitious_activeldap"
+    },
+    {
+        "owner": "atmos",
+        "repository": "fitter_happier"
+    },
+    {
+        "owner": "brosner",
+        "repository": "oebfare"
+    },
+    {
+        "owner": "up_the_irons",
+        "repository": "credit_card_tools"
+    },
+    {
+        "owner": "jnicklas",
+        "repository": "rorem"
+    },
+    {
+        "owner": "cristibalan",
+        "repository": "braid"
+    },
+    {
+        "owner": "jnicklas",
+        "repository": "uploadcolumn"
+    },
+    {
+        "owner": "simonjefford",
+        "repository": "ruby-on-rails-tmbundle"
+    },
+    {
+        "owner": "chneukirchen",
+        "repository": "rack-mirror"
+    },
+    {
+        "owner": "chneukirchen",
+        "repository": "coset-mirror"
+    },
+    {
+        "owner": "drnic",
+        "repository": "javascript-unittest-tmbundle"
+    },
+    {
+        "owner": "engineyard",
+        "repository": "eycap"
+    },
+    {
+        "owner": "chneukirchen",
+        "repository": "gitsum"
+    },
+    {
+        "owner": "wayneeseguin",
+        "repository": "sequel-model"
+    },
+    {
+        "owner": "kevinclark",
+        "repository": "god"
+    },
+    {
+        "owner": "hornbeck",
+        "repository": "blerb-core"
+    },
+    {
+        "owner": "brosner",
+        "repository": "django-mptt"
+    },
+    {
+        "owner": "technomancy",
+        "repository": "bus-scheme"
+    },
+    {
+        "owner": "Caged",
+        "repository": "javascript-bits"
+    },
+    {
+        "owner": "Caged",
+        "repository": "groomlake"
+    },
+    {
+        "owner": "sevenwire",
+        "repository": "forgery"
+    },
+    {
+        "owner": "technicalpickles",
+        "repository": "ambitious-sphinx"
+    },
+    {
+        "owner": "lazyatom",
+        "repository": "soup"
+    },
+    {
+        "owner": "josh",
+        "repository": "rails"
+    },
+    {
+        "owner": "cdcarter",
+        "repository": "backpacking"
+    },
+    {
+        "owner": "jnewland",
+        "repository": "capsize"
+    },
+    {
+        "owner": "bs",
+        "repository": "starling"
+    },
+    {
+        "owner": "sr",
+        "repository": "ape"
+    },
+    {
+        "owner": "collectiveidea",
+        "repository": "awesomeness"
+    },
+    {
+        "owner": "collectiveidea",
+        "repository": "audited"
+    },
+    {
+        "owner": "collectiveidea",
+        "repository": "acts_as_geocodable"
+    },
+    {
+        "owner": "collectiveidea",
+        "repository": "acts_as_money"
+    },
+    {
+        "owner": "collectiveidea",
+        "repository": "calendar_builder"
+    },
+    {
+        "owner": "collectiveidea",
+        "repository": "clear_empty_attributes"
+    },
+    {
+        "owner": "collectiveidea",
+        "repository": "css_naked_day"
+    },
+    {
+        "repository": "imap_authenticatable",
+        "owner": "collectiveidea"
+    },
+    {
+        "repository": "random_finders",
+        "owner": "collectiveidea"
+    },
+    {
+        "repository": "with_action",
+        "owner": "collectiveidea"
+    },
+    {
+        "repository": "graticule",
+        "owner": "collectiveidea"
+    },
+    {
+        "repository": "tinder",
+        "owner": "collectiveidea"
+    },
+    {
+        "repository": "invisible",
+        "owner": "macournoyer"
+    },
+    {
+        "repository": "pyprofile",
+        "owner": "tommorris"
+    },
+    {
+        "repository": "rush",
+        "owner": "adamwiggins"
+    },
+    {
+        "repository": "ike",
+        "owner": "defunkt"
+    },
+    {
+        "repository": "halcyon",
+        "owner": "mtodd"
+    },
+    {
+        "repository": "cruisecontrolrb",
+        "owner": "benburkert"
+    },
+    {
+        "repository": "opml-schema",
+        "owner": "tommorris"
+    },
+    {
+        "repository": "reddy",
+        "owner": "tommorris"
+    },
+    {
+        "repository": "youtube-g",
+        "owner": "shane"
+    },
+    {
+        "repository": "facebox",
+        "owner": "defunkt"
+    },
+    {
+        "repository": "haml",
+        "owner": "haml"
+    },
+    {
+        "repository": "kissgen",
+        "owner": "lancecarlson"
+    },
+    {
+        "repository": "exception_logger",
+        "owner": "anotherjesse"
+    },
+    {
+        "repository": "brain_buster",
+        "owner": "rsanheim"
+    },
+    {
+        "repository": "vanhelsing",
+        "owner": "mojombo"
+    },
+    {
+        "repository": "linthicum",
+        "owner": "bryanl"
+    },
+    {
+        "repository": "textilizefu",
+        "owner": "adelcambre"
+    },
+    {
+        "repository": "slate",
+        "owner": "scharfie"
+    },
+    {
+        "repository": "archangel",
+        "owner": "halorgium"
+    },
+    {
+        "repository": "god",
+        "owner": "halorgium"
+    },
+    {
+        "repository": "newjs",
+        "owner": "drnic"
+    },
+    {
+        "repository": "twitter",
+        "owner": "sferik"
+    },
+    {
+        "repository": "googlebase",
+        "owner": "jnunemaker"
+    },
+    {
+        "repository": "googlereader",
+        "owner": "jnunemaker"
+    },
+    {
+        "repository": "mirrored",
+        "owner": "jnunemaker"
+    },
+    {
+        "repository": "scrobbler",
+        "owner": "jnunemaker"
+    },
+    {
+        "repository": "lorem",
+        "owner": "jnunemaker"
+    },
+    {
+        "repository": "rails-authorization-plugin",
+        "owner": "DocSavage"
+    },
+    {
+        "repository": "drnic_js_test_helpers",
+        "owner": "drnic"
+    },
+    {
+        "repository": "mephisto-erb-templates-plugin",
+        "owner": "psq"
+    },
+    {
+        "repository": "imdb",
+        "owner": "maddox"
+    },
+    {
+        "repository": "userstamp",
+        "owner": "delynn"
+    },
+    {
+        "repository": "matzbot",
+        "owner": "defunkt"
+    },
+    {
+        "repository": "pci4r",
+        "owner": "alexvollmer"
+    },
+    {
+        "repository": "exposure",
+        "owner": "marten"
+    },
+    {
+        "repository": "packet",
+        "owner": "gnufied"
+    },
+    {
+        "repository": "elderbrowser",
+        "owner": "joshuamckenty"
+    },
+    {
+        "repository": "git-wiki",
+        "owner": "kmarsh"
+    },
+    {
+        "repository": "merb-core",
+        "owner": "halorgium"
+    },
+    {
+        "repository": "jim",
+        "owner": "imownbey"
+    },
+    {
+        "repository": "blankable",
+        "owner": "mudge"
+    },
+    {
+        "repository": "merb-for-rails",
+        "owner": "ivey"
+    },
+    {
+        "repository": "portmidi-ruby",
+        "owner": "halfbyte"
+    },
+    {
+        "repository": "vjot",
+        "owner": "pjhyett"
+    },
+    {
+        "repository": "errcount",
+        "owner": "pjhyett"
+    },
+    {
+        "repository": "jquery-autocomplete",
+        "owner": "reinh"
+    },
+    {
+        "repository": "finally",
+        "owner": "anotherjesse"
+    },
+    {
+        "repository": "alfred",
+        "owner": "cannikin"
+    },
+    {
+        "repository": "github-campfire",
+        "owner": "jnewland"
+    },
+    {
+        "repository": "merb-more",
+        "owner": "jnicklas"
+    },
+    {
+        "repository": "merb-core",
+        "owner": "jnicklas"
+    },
+    {
+        "repository": "blanket",
+        "owner": "bigfleet"
+    },
+    {
+        "repository": "merb-more",
+        "owner": "sr"
+    },
+    {
+        "repository": "rubyports",
+        "owner": "chneukirchen"
+    },
+    {
+        "repository": "wordcram",
+        "owner": "lypanov"
+    },
+    {
+        "repository": "dumbapp",
+        "owner": "sr"
+    },
+    {
+        "repository": "merl",
+        "owner": "raymorgan"
+    },
+    {
+        "repository": "squawk-micro",
+        "owner": "zackchandler"
+    },
+    {
+        "repository": "io",
+        "owner": "cdcarter"
+    },
+    {
+        "repository": "fuzed-old",
+        "owner": "KirinDave"
+    },
+    {
+        "repository": "comment_replies",
+        "owner": "drnic"
+    },
+    {
+        "repository": "tumblr",
+        "owner": "kmarsh"
+    },
+    {
+        "repository": "codesnippets",
+        "owner": "anildigital"
+    },
+    {
+        "repository": "barby",
+        "owner": "toretore"
+    },
+    {
+        "repository": "sin",
+        "owner": "kastner"
+    },
+    {
+        "repository": "jsunittest",
+        "owner": "drnic"
+    },
+    {
+        "repository": "delayed_job",
+        "owner": "tobi"
+    },
+    {
+        "repository": "admin_tasks",
+        "owner": "halorgium"
+    },
+    {
+        "repository": "chronic",
+        "owner": "abhay"
+    },
+    {
+        "repository": "ruby-satisfaction",
+        "owner": "nullstyle"
+    },
+    {
+        "repository": "llor-nu-legacy",
+        "owner": "jwhitmire"
+    },
+    {
+        "repository": "rubyurl",
+        "owner": "robbyrussell"
+    },
+    {
+        "repository": "rubyurl",
+        "owner": "adelcambre"
+    },
+    {
+        "repository": "mor7-google-charts-demo",
+        "owner": "francois"
+    },
+    {
+        "repository": "eldorado",
+        "owner": "trevorturk"
+    },
+    {
+        "repository": "stringex",
+        "owner": "rsl"
+    },
+    {
+        "repository": "freefall",
+        "owner": "james"
+    },
+    {
+        "repository": "merb-core",
+        "owner": "xraid"
+    },
+    {
+        "repository": "git-wiki",
+        "owner": "al3x"
+    },
+    {
+        "repository": "kroonikko",
+        "owner": "jarkko"
+    },
+    {
+        "repository": "bus-scheme",
+        "owner": "KirinDave"
+    },
+    {
+        "repository": "bindata",
+        "owner": "dgoodlad"
+    },
+    {
+        "repository": "bookqueue",
+        "owner": "caffo-archived"
+    },
+    {
+        "repository": "strokedb",
+        "owner": "yrashk"
+    },
+    {
+        "repository": "bus-scheme",
+        "owner": "jdhuntington"
+    },
+    {
+        "repository": "yark",
+        "owner": "trey"
+    },
+    {
+        "repository": "capistrano-bells",
+        "owner": "nakajima"
+    },
+    {
+        "repository": "calendar-maker",
+        "owner": "nakajima"
+    },
+    {
+        "repository": "mydry",
+        "owner": "urubatan"
+    },
+    {
+        "repository": "gemify",
+        "owner": "judofyr"
+    },
+    {
+        "repository": "mor7",
+        "owner": "macournoyer"
+    },
+    {
+        "repository": "blog",
+        "owner": "jredville"
+    },
+    {
+        "repository": "hairball",
+        "owner": "ericallam"
+    },
+    {
+        "repository": "merb-core",
+        "owner": "jackdempsey"
+    },
+    {
+        "repository": "evm-portal",
+        "owner": "cdwillie76"
+    },
+    {
+        "repository": "enroll",
+        "owner": "drudru"
+    },
+    {
+        "repository": "cpu-history",
+        "owner": "cbowns"
+    },
+    {
+        "repository": "braid",
+        "owner": "aussiegeek"
+    },
+    {
+        "repository": "attachmerb_fu",
+        "owner": "jackdempsey"
+    },
+    {
+        "repository": "elasticfox",
+        "owner": "anotherjesse"
+    },
+    {
+        "repository": "git-wiki",
+        "owner": "anotherjesse"
+    },
+    {
+        "repository": "awesome_nested_set",
+        "owner": "collectiveidea"
+    },
+    {
+        "repository": "embedded-actions",
+        "owner": "sd"
+    },
+    {
+        "repository": "metafusion",
+        "owner": "mbbx6spp"
+    },
+    {
+        "repository": "viper",
+        "owner": "kevinansfield"
+    },
+    {
+        "repository": "punktfiler",
+        "owner": "pontus"
+    },
+    {
+        "repository": "logeye",
+        "owner": "lachie"
+    },
+    {
+        "repository": "mephisto_textlinkads",
+        "owner": "tobi"
+    },
+    {
+        "repository": "nginx",
+        "owner": "halorgium"
+    },
+    {
+        "repository": "feedbarn",
+        "owner": "technicalpickles"
+    },
+    {
+        "repository": "reinh-com",
+        "owner": "reinh"
+    },
+    {
+        "repository": "fireeagle",
+        "owner": "jnewland"
+    },
+    {
+        "repository": "many-mailers",
+        "owner": "nakajima"
+    },
+    {
+        "repository": "io",
+        "owner": "IoLanguage"
+    },
+    {
+        "repository": "rvideo",
+        "owner": "jaikoo"
+    },
+    {
+        "repository": "cd-covers",
+        "owner": "shadowmaru"
+    },
+    {
+        "repository": "ruby-on-rails-tmbundle",
+        "owner": "sxross"
+    },
+    {
+        "repository": "jquery-humanize-messages-plugin",
+        "owner": "andykent"
+    },
+    {
+        "repository": "fixture-scenarios",
+        "owner": "mojombo"
+    },
+    {
+        "repository": "rails-plugins",
+        "owner": "zachinglis"
+    },
+    {
+        "repository": "date-performance",
+        "owner": "rtomayko"
+    },
+    {
+        "repository": "rails-ssl-authentication",
+        "owner": "labria"
+    },
+    {
+        "repository": "onebody",
+        "owner": "seven1m"
+    },
+    {
+        "repository": "jacks-php",
+        "owner": "russ"
+    },
+    {
+        "repository": "getfake",
+        "owner": "anildigital"
+    },
+    {
+        "repository": "effen",
+        "owner": "nkallen"
+    },
+    {
+        "repository": "template",
+        "owner": "jparker"
+    },
+    {
+        "repository": "TourGuide",
+        "owner": "TekNoLogic"
+    },
+    {
+        "repository": "configuration-files",
+        "owner": "gjnoonan"
+    },
+    {
+        "repository": "fora",
+        "owner": "ELLIOTTCABLE"
+    },
+    {
+        "repository": "dcbot",
+        "owner": "kballard"
+    },
+    {
+        "repository": "cudgel",
+        "owner": "igouss"
+    },
+    {
+        "repository": "micro",
+        "owner": "seaofclouds"
+    },
+    {
+        "repository": "cacheable",
+        "owner": "tobi"
+    },
+    {
+        "repository": "micro-theme",
+        "owner": "seaofclouds"
+    },
+    {
+        "repository": "icaltodoscheduler",
+        "owner": "lypanov"
+    },
+    {
+        "repository": "catface",
+        "owner": "jney"
+    },
+    {
+        "repository": "pyelection",
+        "owner": "alex"
+    },
+    {
+        "repository": "git-todo-py",
+        "owner": "lydgate"
+    },
+    {
+        "repository": "merb-core",
+        "owner": "piclez"
+    },
+    {
+        "repository": "merb-more",
+        "owner": "piclez"
+    },
+    {
+        "repository": "merb-plugins",
+        "owner": "piclez"
+    },
+    {
+        "repository": "ami-ragel",
+        "owner": "jicksta"
+    },
+    {
+        "repository": "test",
+        "owner": "weepy"
+    },
+    {
+        "repository": "hydrate",
+        "owner": "olivM"
+    },
+    {
+        "repository": "pmpknpi",
+        "owner": "sintaxi"
+    },
+    {
+        "repository": "restful-authentication",
+        "owner": "rmanalan"
+    },
+    {
+        "repository": "facebox",
+        "owner": "rmanalan"
+    },
+    {
+        "repository": "bhandar",
+        "owner": "shantanoo"
+    },
+    {
+        "repository": "gcbot",
+        "owner": "halorgium"
+    },
+    {
+        "repository": "will_paginate",
+        "owner": "mislav"
+    },
+    {
+        "repository": "socialgraph-viewer",
+        "owner": "rmanalan"
+    },
+    {
+        "repository": "ruvi",
+        "owner": "lypanov"
+    },
+    {
+        "repository": "soco",
+        "owner": "caius"
+    },
+    {
+        "repository": "ruby-gsl",
+        "owner": "codahale"
+    },
+    {
+        "repository": "yard",
+        "owner": "lsegal"
+    },
+    {
+        "repository": "castanaut",
+        "owner": "joseph"
+    },
+    {
+        "repository": "ruby-tmbundle",
+        "owner": "drnic"
+    },
+    {
+        "repository": "html-tmbundle",
+        "owner": "drnic"
+    },
+    {
+        "repository": "orb",
+        "owner": "noin"
+    },
+    {
+        "repository": "ikhebhonger",
+        "owner": "bartcortooms"
+    },
+    {
+        "repository": "sprinkle",
+        "owner": "sprinkle-tool"
+    },
+    {
+        "repository": "wlwdeezerplayer",
+        "owner": "julesss"
+    },
+    {
+        "repository": "utility-belt",
+        "owner": "gilesbowkett"
+    },
+    {
+        "repository": "restful-authentication",
+        "owner": "labria"
+    },
+    {
+        "repository": "ruby-screen",
+        "owner": "dpetersen"
+    },
+    {
+        "repository": "eatingsafe",
+        "owner": "aharper"
+    },
+    {
+        "repository": "name_parser",
+        "owner": "bricooke"
+    },
+    {
+        "repository": "vebiasoptimizer",
+        "owner": "marcinpohl"
+    },
+    {
+        "repository": "ext_scaffold",
+        "owner": "drudru"
+    },
+    {
+        "repository": "spongewolf",
+        "owner": "ckhsponge"
+    },
+    {
+        "repository": "amazing",
+        "owner": "dag"
+    },
+    {
+        "repository": "ruby-merlin",
+        "owner": "pdsphil"
+    },
+    {
+        "repository": "tekkonfig",
+        "owner": "tekkub"
+    },
+    {
+        "repository": "ruby-idology",
+        "owner": "pdsphil"
+    },
+    {
+        "repository": "luaclr",
+        "owner": "mascarenhas"
+    },
+    {
+        "repository": "bricklet-core",
+        "owner": "jasonm"
+    },
+    {
+        "repository": "bookeater",
+        "owner": "gensym"
+    },
+    {
+        "repository": "facon",
+        "owner": "chuyeow"
+    },
+    {
+        "repository": "stat",
+        "owner": "vanpelt"
+    },
+    {
+        "repository": "rubynomic",
+        "owner": "Norgg"
+    },
+    {
+        "repository": "depth-charge",
+        "owner": "bscofield"
+    },
+    {
+        "repository": "portfolio",
+        "owner": "myabc"
+    },
+    {
+        "repository": "clickatell",
+        "owner": "lukeredpath"
+    },
+    {
+        "repository": "do_notation",
+        "owner": "aanand"
+    },
+    {
+        "repository": "pictrails",
+        "owner": "shingara"
+    },
+    {
+        "repository": "annotate_models",
+        "owner": "ctran"
+    },
+    {
+        "repository": "blueprint_layout",
+        "owner": "alce"
+    },
+    {
+        "repository": "wp_theme_victoria",
+        "owner": "enhiro"
+    },
+    {
+        "repository": "cosmo",
+        "owner": "travis"
+    },
+    {
+        "repository": "fogbugz-svnhook",
+        "owner": "francois"
+    },
+    {
+        "repository": "haml",
+        "owner": "mislav"
+    },
+    {
+        "repository": "quicktest",
+        "owner": "gregwebs"
+    },
+    {
+        "repository": "getfamilliarwithgit",
+        "owner": "bcbroom"
+    },
+    {
+        "repository": "tonal",
+        "owner": "bobbyrward"
+    },
+    {
+        "repository": "axiom",
+        "owner": "daly"
+    },
+    {
+        "repository": "deal",
+        "owner": "bloodearnest"
+    },
+    {
+        "repository": "knuff",
+        "owner": "jesper"
+    },
+    {
+        "repository": "testprj",
+        "owner": "Judeqiu"
+    },
+    {
+        "repository": "gazelle",
+        "owner": "haberman"
+    },
+    {
+        "repository": "fast-recs-collate",
+        "owner": "haberman"
+    },
+    {
+        "repository": "family_budget",
+        "owner": "francois"
+    },
+    {
+        "repository": "javascript-jquery-tmbundle",
+        "owner": "drnic"
+    },
+    {
+        "repository": "markable",
+        "owner": "AndrewO"
+    },
+    {
+        "repository": "erlenmeyer",
+        "owner": "KirinDave"
+    },
+    {
+        "repository": "yikes",
+        "owner": "paulcbetts"
+    },
+    {
+        "repository": "erlenmeyer",
+        "owner": "mojombo"
+    },
+    {
+        "repository": "python-tool-legacy",
+        "owner": "sudachen"
+    },
+    {
+        "repository": "tableau",
+        "owner": "bousquet"
+    },
+    {
+        "repository": "blue-channel",
+        "owner": "davemerwin"
+    },
+    {
+        "repository": "weshowthemoney-com",
+        "owner": "maborg"
+    },
+    {
+        "repository": "tarn",
+        "owner": "jdp"
+    },
+    {
+        "repository": "jquery",
+        "owner": "davemerwin"
+    },
+    {
+        "repository": "bazdig",
+        "owner": "slim"
+    },
+    {
+        "repository": "github-gem",
+        "owner": "defunkt"
+    },
+    {
+        "repository": "music-renamer",
+        "owner": "snoack"
+    },
+    {
+        "repository": "emacs-torrent",
+        "owner": "sverrejoh"
+    },
+    {
+        "repository": "roleplay",
+        "owner": "ask"
+    },
+    {
+        "repository": "mediabumper",
+        "owner": "pjay"
+    },
+    {
+        "repository": "cl-randist",
+        "owner": "lvaruzza"
+    },
+    {
+        "repository": "thesis",
+        "owner": "bloodearnest"
+    },
+    {
+        "repository": "db_console",
+        "owner": "santry"
+    },
+    {
+        "repository": "merb-core",
+        "owner": "cobrien"
+    },
+    {
+        "repository": "srename",
+        "owner": "sunny"
+    },
+    {
+        "repository": "django-mptt",
+        "owner": "davemerwin"
+    },
+    {
+        "repository": "mizar2cl",
+        "owner": "brad"
+    },
+    {
+        "repository": "lmkproject",
+        "owner": "shillcock"
+    },
+    {
+        "repository": "gemedit",
+        "owner": "lmarlow"
+    },
+    {
+        "repository": "aasm",
+        "owner": "aasm"
+    },
+    {
+        "repository": "prototype-tmbundle",
+        "owner": "kangax"
+    },
+    {
+        "repository": "mortal-coil",
+        "owner": "gerard"
+    },
+    {
+        "repository": "fixture-scenarios",
+        "owner": "timcharper"
+    },
+    {
+        "repository": "mongrel_proctitle",
+        "owner": "psi"
+    },
+    {
+        "repository": "json-glib",
+        "owner": "ebassi"
+    },
+    {
+        "repository": "piccr",
+        "owner": "crafterm"
+    },
+    {
+        "repository": "sinatra",
+        "owner": "auser"
+    },
+    {
+        "repository": "vimfiles",
+        "owner": "scrooloose"
+    },
+    {
+        "repository": "fightinjoe-merb-blog",
+        "owner": "fightinjoe"
+    },
+    {
+        "repository": "capture",
+        "owner": "crafterm"
+    },
+    {
+        "repository": "vocab",
+        "owner": "alltom"
+    },
+    {
+        "repository": "raz",
+        "owner": "PhilGeek"
+    },
+    {
+        "repository": "rpy",
+        "owner": "taf2"
+    },
+    {
+        "repository": "action_mailer_tls",
+        "owner": "sotirac"
+    },
+    {
+        "repository": "puppet",
+        "owner": "brenton"
+    },
+    {
+        "repository": "alm-familyfellowship-com",
+        "owner": "naryga"
+    },
+    {
+        "repository": "ir-toys",
+        "owner": "kevindamm"
+    },
+    {
+        "repository": "open-scores",
+        "owner": "horndude77"
+    },
+    {
+        "repository": "email-veracity",
+        "owner": "heycarsten"
+    },
+    {
+        "repository": "tempo",
+        "owner": "bryansray"
+    },
+    {
+        "repository": "weblocks",
+        "owner": "aggieben"
+    },
+    {
+        "repository": "ezapprove2",
+        "owner": "brucem"
+    },
+    {
+        "repository": "merb-plugins",
+        "owner": "mattetti"
+    },
+    {
+        "repository": "merb_mart",
+        "owner": "myabc"
+    },
+    {
+        "repository": "enki",
+        "owner": "quamen"
+    },
+    {
+        "repository": "records-at-large",
+        "owner": "toke"
+    },
+    {
+        "repository": "enki-vim",
+        "owner": "xaviershay"
+    },
+    {
+        "repository": "tools",
+        "owner": "meqif"
+    },
+    {
+        "repository": "miter",
+        "owner": "aflatter"
+    },
+    {
+        "repository": "hem",
+        "owner": "rtomayko"
+    },
+    {
+        "repository": "t-ch-y",
+        "owner": "RyanSpeaking"
+    },
+    {
+        "repository": "ircious",
+        "owner": "ozamosi"
+    },
+    {
+        "repository": "audenshaw-group-cms",
+        "owner": "Bjwebb"
+    },
+    {
+        "repository": "camarabuntu",
+        "owner": "rory"
+    },
+    {
+        "repository": "icalico",
+        "owner": "rabble"
+    },
+    {
+        "repository": "gentlerest",
+        "owner": "sporkmonger"
+    },
+    {
+        "repository": "treetop",
+        "owner": "nathansobo"
+    },
+    {
+        "repository": "puppet",
+        "owner": "shadoi"
+    },
+    {
+        "repository": "delicious-meal",
+        "owner": "cbowns"
+    },
+    {
+        "repository": "snaptest",
+        "owner": "Jakobo"
+    },
+    {
+        "repository": "sxsw",
+        "owner": "danielmorrison"
+    },
+    {
+        "repository": "joe-solving-np-complete-problems",
+        "owner": "yolfer"
+    },
+    {
+        "repository": "acts_as_exclusive",
+        "owner": "eggie5"
+    },
+    {
+        "repository": "cairo-clock",
+        "owner": "stephane"
+    },
+    {
+        "repository": "daonut",
+        "owner": "kziv"
+    },
+    {
+        "repository": "java-memcached-client",
+        "owner": "dustin"
+    },
+    {
+        "repository": "yacleaner",
+        "owner": "tacvbo"
+    },
+    {
+        "repository": "good-browser-bad-browser",
+        "owner": "seaofclouds"
+    },
+    {
+        "repository": "rspec_hpricot_matchers",
+        "owner": "pd"
+    },
+    {
+        "repository": "buildwatch",
+        "owner": "dustin"
+    },
+    {
+        "repository": "ruby-freebase",
+        "owner": "chriseppstein"
+    },
+    {
+        "repository": "rspec",
+        "owner": "dchelimsky"
+    },
+    {
+        "repository": "ruby-freebase",
+        "owner": "dustin"
+    },
+    {
+        "repository": "contentpackmaker",
+        "owner": "joshuamckenty"
+    },
+    {
+        "repository": "github-gem",
+        "owner": "halorgium"
+    },
+    {
+        "repository": "n3-tmbundle",
+        "owner": "tommorris"
+    },
+    {
+        "repository": "servitor",
+        "owner": "halorgium"
+    },
+    {
+        "repository": "functional-javascript",
+        "owner": "osteele"
+    },
+    {
+        "repository": "sequentially",
+        "owner": "osteele"
+    },
+    {
+        "repository": "pyfsa",
+        "owner": "osteele"
+    },
+    {
+        "repository": "fluently",
+        "owner": "osteele"
+    },
+    {
+        "repository": "mephisto",
+        "owner": "mephistorb"
+    },
+    {
+        "repository": "mephisto",
+        "owner": "francois"
+    },
+    {
+        "repository": "stickshift",
+        "owner": "nicksieger"
+    },
+    {
+        "repository": "ruby-awareness-api",
+        "owner": "benwyrosdick"
+    },
+    {
+        "repository": "tonal",
+        "owner": "bobbyrward"
+    },
+    {
+        "repository": "axiom",
+        "owner": "daly"
+    },
+    {
+        "repository": "deal",
+        "owner": "bloodearnest"
+    },
+    {
+        "repository": "knuff",
+        "owner": "jesper"
+    },
+    {
+        "repository": "testprj",
+        "owner": "Judeqiu"
+    },
+    {
+        "repository": "gazelle",
+        "owner": "haberman"
+    },
+    {
+        "repository": "fast-recs-collate",
+        "owner": "haberman"
+    },
+    {
+        "repository": "family_budget",
+        "owner": "francois"
+    },
+    {
+        "repository": "javascript-jquery-tmbundle",
+        "owner": "drnic"
+    },
+    {
+        "repository": "markable",
+        "owner": "AndrewO"
+    },
+    {
+        "repository": "erlenmeyer",
+        "owner": "KirinDave"
+    },
+    {
+        "repository": "yikes",
+        "owner": "paulcbetts"
+    },
+    {
+        "repository": "erlenmeyer",
+        "owner": "mojombo"
+    },
+    {
+        "repository": "python-tool-legacy",
+        "owner": "sudachen"
+    },
+    {
+        "repository": "tableau",
+        "owner": "bousquet"
+    },
+    {
+        "repository": "blue-channel",
+        "owner": "davemerwin"
+    },
+    {
+        "repository": "weshowthemoney-com",
+        "owner": "maborg"
+    },
+    {
+        "repository": "tarn",
+        "owner": "jdp"
+    },
+    {
+        "repository": "jquery",
+        "owner": "davemerwin"
+    },
+    {
+        "repository": "bazdig",
+        "owner": "slim"
+    },
+    {
+        "repository": "github-gem",
+        "owner": "defunkt"
+    },
+    {
+        "repository": "music-renamer",
+        "owner": "snoack"
+    },
+    {
+        "repository": "emacs-torrent",
+        "owner": "sverrejoh"
+    },
+    {
+        "repository": "roleplay",
+        "owner": "ask"
+    },
+    {
+        "repository": "mediabumper",
+        "owner": "pjay"
+    },
+    {
+        "repository": "cl-randist",
+        "owner": "lvaruzza"
+    },
+    {
+        "repository": "thesis",
+        "owner": "bloodearnest"
+    },
+    {
+        "repository": "db_console",
+        "owner": "santry"
+    },
+    {
+        "repository": "merb-core",
+        "owner": "cobrien"
+    },
+    {
+        "repository": "srename",
+        "owner": "sunny"
+    },
+    {
+        "repository": "django-mptt",
+        "owner": "davemerwin"
+    },
+    {
+        "repository": "mizar2cl",
+        "owner": "brad"
+    },
+    {
+        "repository": "lmkproject",
+        "owner": "shillcock"
+    },
+    {
+        "repository": "gemedit",
+        "owner": "lmarlow"
+    },
+    {
+        "repository": "aasm",
+        "owner": "aasm"
+    },
+    {
+        "repository": "prototype-tmbundle",
+        "owner": "kangax"
+    },
+    {
+        "repository": "mortal-coil",
+        "owner": "gerard"
+    },
+    {
+        "repository": "fixture-scenarios",
+        "owner": "timcharper"
+    },
+    {
+        "repository": "mongrel_proctitle",
+        "owner": "psi"
+    },
+    {
+        "repository": "json-glib",
+        "owner": "ebassi"
+    },
+    {
+        "repository": "piccr",
+        "owner": "crafterm"
+    },
+    {
+        "repository": "sinatra",
+        "owner": "auser"
+    },
+    {
+        "repository": "vimfiles",
+        "owner": "scrooloose"
+    },
+    {
+        "repository": "fightinjoe-merb-blog",
+        "owner": "fightinjoe"
+    },
+    {
+        "repository": "capture",
+        "owner": "crafterm"
+    },
+    {
+        "repository": "vocab",
+        "owner": "alltom"
+    },
+    {
+        "repository": "raz",
+        "owner": "PhilGeek"
+    },
+    {
+        "repository": "rpy",
+        "owner": "taf2"
+    },
+    {
+        "repository": "action_mailer_tls",
+        "owner": "sotirac"
+    },
+    {
+        "repository": "puppet",
+        "owner": "brenton"
+    },
+    {
+        "repository": "alm-familyfellowship-com",
+        "owner": "naryga"
+    },
+    {
+        "repository": "ir-toys",
+        "owner": "kevindamm"
+    },
+    {
+        "repository": "open-scores",
+        "owner": "horndude77"
+    },
+    {
+        "repository": "email-veracity",
+        "owner": "heycarsten"
+    },
+    {
+        "repository": "tempo",
+        "owner": "bryansray"
+    },
+    {
+        "repository": "weblocks",
+        "owner": "aggieben"
+    },
+    {
+        "repository": "ezapprove2",
+        "owner": "brucem"
+    },
+    {
+        "repository": "merb-plugins",
+        "owner": "mattetti"
+    },
+    {
+        "repository": "merb_mart",
+        "owner": "myabc"
+    },
+    {
+        "repository": "enki",
+        "owner": "quamen"
+    },
+    {
+        "repository": "records-at-large",
+        "owner": "toke"
+    },
+    {
+        "repository": "enki-vim",
+        "owner": "xaviershay"
+    },
+    {
+        "repository": "tools",
+        "owner": "meqif"
+    },
+    {
+        "repository": "miter",
+        "owner": "aflatter"
+    },
+    {
+        "repository": "hem",
+        "owner": "rtomayko"
+    },
+    {
+        "repository": "t-ch-y",
+        "owner": "RyanSpeaking"
+    },
+    {
+        "repository": "ircious",
+        "owner": "ozamosi"
+    },
+    {
+        "repository": "audenshaw-group-cms",
+        "owner": "Bjwebb"
+    },
+    {
+        "repository": "camarabuntu",
+        "owner": "rory"
+    },
+    {
+        "repository": "icalico",
+        "owner": "rabble"
+    },
+    {
+        "repository": "gentlerest",
+        "owner": "sporkmonger"
+    },
+    {
+        "repository": "treetop",
+        "owner": "nathansobo"
+    },
+    {
+        "repository": "puppet",
+        "owner": "shadoi"
+    },
+    {
+        "repository": "delicious-meal",
+        "owner": "cbowns"
+    },
+    {
+        "repository": "snaptest",
+        "owner": "Jakobo"
+    },
+    {
+        "repository": "sxsw",
+        "owner": "danielmorrison"
+    },
+    {
+        "repository": "joe-solving-np-complete-problems",
+        "owner": "yolfer"
+    },
+    {
+        "repository": "acts_as_exclusive",
+        "owner": "eggie5"
+    },
+    {
+        "repository": "cairo-clock",
+        "owner": "stephane"
+    },
+    {
+        "repository": "daonut",
+        "owner": "kziv"
+    },
+    {
+        "repository": "java-memcached-client",
+        "owner": "dustin"
+    },
+    {
+        "repository": "yacleaner",
+        "owner": "tacvbo"
+    },
+    {
+        "repository": "good-browser-bad-browser",
+        "owner": "seaofclouds"
+    },
+    {
+        "repository": "rspec_hpricot_matchers",
+        "owner": "pd"
+    },
+    {
+        "repository": "buildwatch",
+        "owner": "dustin"
+    },
+    {
+        "repository": "ruby-freebase",
+        "owner": "chriseppstein"
+    },
+    {
+        "repository": "rspec",
+        "owner": "dchelimsky"
+    },
+    {
+        "repository": "ruby-freebase",
+        "owner": "dustin"
+    },
+    {
+        "repository": "contentpackmaker",
+        "owner": "joshuamckenty"
+    },
+    {
+        "repository": "github-gem",
+        "owner": "halorgium"
+    },
+    {
+        "repository": "n3-tmbundle",
+        "owner": "tommorris"
+    },
+    {
+        "repository": "servitor",
+        "owner": "halorgium"
+    },
+    {
+        "repository": "functional-javascript",
+        "owner": "osteele"
+    },
+    {
+        "repository": "sequentially",
+        "owner": "osteele"
+    },
+    {
+        "repository": "pyfsa",
+        "owner": "osteele"
+    },
+    {
+        "repository": "fluently",
+        "owner": "osteele"
+    },
+    {
+        "repository": "mephisto",
+        "owner": "mephistorb"
+    },
+    {
+        "repository": "mephisto",
+        "owner": "francois"
+    },
+    {
+        "repository": "stickshift",
+        "owner": "nicksieger"
+    },
+    {
+        "repository": "ruby-awareness-api",
+        "owner": "benwyrosdick"
+    },
+    {
+        "repository": "tonal",
+        "owner": "bobbyrward"
+    },
+    {
+        "repository": "axiom",
+        "owner": "daly"
+    },
+    {
+        "repository": "deal",
+        "owner": "bloodearnest"
+    },
+    {
+        "repository": "knuff",
+        "owner": "jesper"
+    },
+    {
+        "repository": "testprj",
+        "owner": "Judeqiu"
+    },
+    {
+        "repository": "gazelle",
+        "owner": "haberman"
+    },
+    {
+        "repository": "fast-recs-collate",
+        "owner": "haberman"
+    },
+    {
+        "repository": "family_budget",
+        "owner": "francois"
+    },
+    {
+        "repository": "javascript-jquery-tmbundle",
+        "owner": "drnic"
+    },
+    {
+        "repository": "markable",
+        "owner": "AndrewO"
+    },
+    {
+        "repository": "erlenmeyer",
+        "owner": "KirinDave"
+    },
+    {
+        "repository": "yikes",
+        "owner": "paulcbetts"
+    },
+    {
+        "repository": "erlenmeyer",
+        "owner": "mojombo"
+    },
+    {
+        "repository": "python-tool-legacy",
+        "owner": "sudachen"
+    },
+    {
+        "repository": "tableau",
+        "owner": "bousquet"
+    },
+    {
+        "repository": "blue-channel",
+        "owner": "davemerwin"
+    },
+    {
+        "repository": "weshowthemoney-com",
+        "owner": "maborg"
+    },
+    {
+        "repository": "tarn",
+        "owner": "jdp"
+    },
+    {
+        "repository": "jquery",
+        "owner": "davemerwin"
+    },
+    {
+        "repository": "bazdig",
+        "owner": "slim"
+    },
+    {
+        "repository": "github-gem",
+        "owner": "defunkt"
+    },
+    {
+        "repository": "music-renamer",
+        "owner": "snoack"
+    },
+    {
+        "repository": "emacs-torrent",
+        "owner": "sverrejoh"
+    },
+    {
+        "repository": "roleplay",
+        "owner": "ask"
+    },
+    {
+        "repository": "mediabumper",
+        "owner": "pjay"
+    },
+    {
+        "repository": "cl-randist",
+        "owner": "lvaruzza"
+    },
+    {
+        "repository": "thesis",
+        "owner": "bloodearnest"
+    },
+    {
+        "repository": "db_console",
+        "owner": "santry"
+    },
+    {
+        "repository": "merb-core",
+        "owner": "cobrien"
+    },
+    {
+        "repository": "srename",
+        "owner": "sunny"
+    },
+    {
+        "repository": "django-mptt",
+        "owner": "davemerwin"
+    },
+    {
+        "repository": "mizar2cl",
+        "owner": "brad"
+    },
+    {
+        "repository": "lmkproject",
+        "owner": "shillcock"
+    },
+    {
+        "repository": "gemedit",
+        "owner": "lmarlow"
+    },
+    {
+        "repository": "aasm",
+        "owner": "aasm"
+    },
+    {
+        "repository": "prototype-tmbundle",
+        "owner": "kangax"
+    },
+    {
+        "repository": "mortal-coil",
+        "owner": "gerard"
+    },
+    {
+        "repository": "fixture-scenarios",
+        "owner": "timcharper"
+    },
+    {
+        "repository": "mongrel_proctitle",
+        "owner": "psi"
+    },
+    {
+        "repository": "json-glib",
+        "owner": "ebassi"
+    },
+    {
+        "repository": "piccr",
+        "owner": "crafterm"
+    },
+    {
+        "repository": "sinatra",
+        "owner": "auser"
+    },
+    {
+        "repository": "vimfiles",
+        "owner": "scrooloose"
+    },
+    {
+        "repository": "fightinjoe-merb-blog",
+        "owner": "fightinjoe"
+    },
+    {
+        "repository": "capture",
+        "owner": "crafterm"
+    },
+    {
+        "repository": "vocab",
+        "owner": "alltom"
+    },
+    {
+        "repository": "raz",
+        "owner": "PhilGeek"
+    },
+    {
+        "repository": "rpy",
+        "owner": "taf2"
+    },
+    {
+        "repository": "action_mailer_tls",
+        "owner": "sotirac"
+    },
+    {
+        "repository": "puppet",
+        "owner": "brenton"
+    },
+    {
+        "repository": "alm-familyfellowship-com",
+        "owner": "naryga"
+    },
+    {
+        "repository": "ir-toys",
+        "owner": "kevindamm"
+    },
+    {
+        "repository": "open-scores",
+        "owner": "horndude77"
+    },
+    {
+        "repository": "email-veracity",
+        "owner": "heycarsten"
+    },
+    {
+        "repository": "tempo",
+        "owner": "bryansray"
+    },
+    {
+        "repository": "weblocks",
+        "owner": "aggieben"
+    },
+    {
+        "repository": "ezapprove2",
+        "owner": "brucem"
+    },
+    {
+        "repository": "merb-plugins",
+        "owner": "mattetti"
+    },
+    {
+        "repository": "merb_mart",
+        "owner": "myabc"
+    },
+    {
+        "repository": "enki",
+        "owner": "quamen"
+    },
+    {
+        "repository": "records-at-large",
+        "owner": "toke"
+    },
+    {
+        "repository": "enki-vim",
+        "owner": "xaviershay"
+    },
+    {
+        "repository": "tools",
+        "owner": "meqif"
+    },
+    {
+        "repository": "miter",
+        "owner": "aflatter"
+    },
+    {
+        "repository": "hem",
+        "owner": "rtomayko"
+    },
+    {
+        "repository": "t-ch-y",
+        "owner": "RyanSpeaking"
+    },
+    {
+        "repository": "ircious",
+        "owner": "ozamosi"
+    },
+    {
+        "repository": "audenshaw-group-cms",
+        "owner": "Bjwebb"
+    },
+    {
+        "repository": "camarabuntu",
+        "owner": "rory"
+    },
+    {
+        "repository": "icalico",
+        "owner": "rabble"
+    },
+    {
+        "repository": "gentlerest",
+        "owner": "sporkmonger"
+    },
+    {
+        "repository": "treetop",
+        "owner": "nathansobo"
+    },
+    {
+        "repository": "puppet",
+        "owner": "shadoi"
+    },
+    {
+        "repository": "delicious-meal",
+        "owner": "cbowns"
+    },
+    {
+        "repository": "snaptest",
+        "owner": "Jakobo"
+    },
+    {
+        "repository": "sxsw",
+        "owner": "danielmorrison"
+    },
+    {
+        "repository": "joe-solving-np-complete-problems",
+        "owner": "yolfer"
+    },
+    {
+        "repository": "acts_as_exclusive",
+        "owner": "eggie5"
+    },
+    {
+        "repository": "cairo-clock",
+        "owner": "stephane"
+    },
+    {
+        "repository": "daonut",
+        "owner": "kziv"
+    },
+    {
+        "repository": "java-memcached-client",
+        "owner": "dustin"
+    },
+    {
+        "repository": "yacleaner",
+        "owner": "tacvbo"
+    },
+    {
+        "repository": "good-browser-bad-browser",
+        "owner": "seaofclouds"
+    },
+    {
+        "repository": "rspec_hpricot_matchers",
+        "owner": "pd"
+    },
+    {
+        "repository": "buildwatch",
+        "owner": "dustin"
+    },
+    {
+        "repository": "ruby-freebase",
+        "owner": "chriseppstein"
+    },
+    {
+        "repository": "rspec",
+        "owner": "dchelimsky"
+    },
+    {
+        "repository": "ruby-freebase",
+        "owner": "dustin"
+    },
+    {
+        "repository": "contentpackmaker",
+        "owner": "joshuamckenty"
+    },
+    {
+        "repository": "github-gem",
+        "owner": "halorgium"
+    },
+    {
+        "repository": "n3-tmbundle",
+        "owner": "tommorris"
+    },
+    {
+        "repository": "servitor",
+        "owner": "halorgium"
+    },
+    {
+        "repository": "functional-javascript",
+        "owner": "osteele"
+    },
+    {
+        "repository": "sequentially",
+        "owner": "osteele"
+    },
+    {
+        "repository": "pyfsa",
+        "owner": "osteele"
+    },
+    {
+        "repository": "fluently",
+        "owner": "osteele"
+    },
+    {
+        "repository": "mephisto",
+        "owner": "mephistorb"
+    },
+    {
+        "repository": "mephisto",
+        "owner": "francois"
+    },
+    {
+        "repository": "stickshift",
+        "owner": "nicksieger"
+    },
+    {
+        "repository": "ruby-awareness-api",
+        "owner": "benwyrosdick"
+    },
+    {
+        "repository": "AlgsImp",
+        "owner": "chnhideyoshi"
+    },
+    {
+        "repository": "Behat-Zombie",
+        "owner": "Shashikant86"
+    },
+    {
+        "repository": "mixedletters",
+        "owner": "eclectics"
+    },
+    {
+        "repository": "Jukito",
+        "owner": "yln"
+    },
+    {
+        "repository": "SoundManager2",
+        "owner": "lasconic"
+    },
+    {
+        "repository": "try_git",
+        "owner": "hhklv"
+    },
+    {
+        "repository": "ey-cloud-recipes",
+        "owner": "LessPainful"
+    },
+    {
+        "repository": "linux",
+        "owner": "zhibo"
+    },
+    {
+        "repository": "jquery-filedrop",
+        "owner": "morr"
+    },
+    {
+        "repository": "android-app",
+        "owner": "cxqntu"
+    },
+    {
+        "repository": "Asteroids",
+        "owner": "Yoggiburken"
+    },
+    {
+        "repository": "linktomob",
+        "owner": "praveenvijayan"
+    },
+    {
+        "repository": "hotfix",
+        "owner": "scottsd"
+    },
+    {
+        "repository": "opensudoku",
+        "owner": "cxqntu"
+    },
+    {
+        "repository": "timer",
+        "owner": "eclectics"
+    },
+    {
+        "repository": "try_git",
+        "owner": "daaoke"
+    },
+    {
+        "repository": "ArduinoCommander-ethernet",
+        "owner": "dlugs"
+    },
+    {
+        "repository": "LogisticsPipes",
+        "owner": "connor44566"
+    },
+    {
+        "repository": "croudlending",
+        "owner": "khalidrahmani"
+    },
+    {
+        "repository": "numbers_and_words",
+        "owner": "GSI"
+    },
+    {
+        "repository": "try_git",
+        "owner": "chaitanyalakshmi"
+    },
+    {
+        "repository": "Dired",
+        "owner": "therik"
+    },
+    {
+        "repository": "ruby-net-ldap",
+        "owner": "DenisKnauf"
+    },
+    {
+        "repository": "easy-mangos",
+        "owner": "alikoth"
+    },
+    {
+        "repository": "artigianitigullio",
+        "owner": "angelonium"
+    },
+    {
+        "repository": "intro.js",
+        "owner": "prajwal-aithal"
+    },
+    {
+        "repository": "scroll",
+        "owner": "leemachin"
+    },
+    {
+        "repository": "matte",
+        "owner": "janva"
+    },
+    {
+        "repository": "Equivalent-Exchange-3",
+        "owner": "aginsun"
+    },
+    {
+        "repository": "hibernate",
+        "owner": "iagan"
+    },
+    {
+        "repository": "jerome-wang.github.com",
+        "owner": "jerome-wang"
+    },
+    {
+        "repository": "izpack",
+        "owner": "caitale"
+    },
+    {
+        "repository": "sample_app1",
+        "owner": "canonfly1"
+    },
+    {
+        "repository": "bootstrap-timepicker",
+        "owner": "HammadAlvi"
+    },
+    {
+        "repository": "android",
+        "owner": "VJacobbigdata"
+    },
+    {
+        "repository": "Geocoding",
+        "owner": "anton-vakulchyk"
+    },
+    {
+        "repository": "CompareCam",
+        "owner": "tommypeps"
+    },
+    {
+        "repository": "jQuery-Plugins",
+        "owner": "moura137"
+    },
+    {
+        "repository": "travaasa2_0",
+        "owner": "travaasa"
+    },
+    {
+        "repository": "realpoll",
+        "owner": "rlbisbe"
+    },
+    {
+        "repository": "AIMS_No9",
+        "owner": "muzudho"
+    },
+    {
+        "repository": "festos",
+        "owner": "HengeSense"
+    },
+    {
+        "repository": "helloworld_multiscreen",
+        "owner": "nicolaiarocci"
+    },
+    {
+        "repository": "autopreview",
+        "owner": "dalelotts"
+    },
+    {
+        "repository": "Python",
+        "owner": "hawkboy"
+    },
+    {
+        "repository": "xmlimport_notifier",
+        "owner": "andrewminton"
+    },
+    {
+        "repository": "ghc-alsa-core",
+        "owner": "pld-linux"
+    },
+    {
+        "repository": "intro.js",
+        "owner": "bgarlock"
+    },
+    {
+        "repository": "theancientsecretsoflevitation.github.com",
+        "owner": "TheAncientSecretsOfLevitation"
+    },
+    {
+        "repository": "trakfred-workflow",
+        "owner": "fgr0"
+    },
+    {
+        "repository": "homepage-old",
+        "owner": "darkbaby123"
+    },
+    {
+        "repository": "PHP--TVRage",
+        "owner": "kkirsche"
+    },
+    {
+        "repository": "svg-plot-gen",
+        "owner": "richardeoin"
+    },
+    {
+        "repository": "KnightHawk3",
+        "owner": "KnightHawk3"
+    },
+    {
+        "repository": "meteor-the-medium-is-the-message",
+        "owner": "olizilla"
+    },
+    {
+        "repository": "ghc-syb",
+        "owner": "pld-linux"
+    },
+    {
+        "repository": "first_app",
+        "owner": "ballavilley"
+    },
+    {
+        "repository": "utils",
+        "owner": "chlorinejs"
+    },
+    {
+        "repository": "luamin",
+        "owner": "mathiasbynens"
+    },
+    {
+        "repository": "gbenga",
+        "owner": "gbenga123"
+    },
+    {
+        "repository": "fhnw-apsi",
+        "owner": "thomas-baumann"
+    },
+    {
+        "repository": "cap_bootstrap",
+        "owner": "vadim-v"
+    },
+    {
+        "repository": "i18n-verify",
+        "owner": "eventchart"
+    },
+    {
+        "repository": "try_git",
+        "owner": "erevus"
+    },
+    {
+        "repository": "dictionary.org.ua",
+        "owner": "vseprav"
+    },
+    {
+        "repository": "ingress-intel-total-conversion-o",
+        "owner": "jrezin"
+    },
+    {
+        "repository": "heartgenetics.github.com",
+        "owner": "heartgenetics"
+    },
+    {
+        "repository": "helloCss",
+        "owner": "rajadhi"
+    },
+    {
+        "repository": "ai-nlp",
+        "owner": "BusyByte"
+    },
+    {
+        "repository": "sanguine",
+        "owner": "andersaloof"
+    },
+    {
+        "repository": "Hispania",
+        "owner": "kmatveev"
+    },
+    {
+        "repository": "tutorial",
+        "owner": "christofouche"
+    },
+    {
+        "repository": "neo4j-rest-client",
+        "owner": "HengeSense"
+    },
+    {
+        "repository": "Risto",
+        "owner": "angelonium"
+    },
+    {
+        "repository": "ProjetYayaNatou",
+        "owner": "baldebolet"
+    },
+    {
+        "repository": "intro.js",
+        "owner": "yourbuddyrohan"
+    },
+    {
+        "repository": "www.gittip.com",
+        "owner": "arkidas"
+    },
+    {
+        "repository": "Faker.py",
+        "owner": "hrishikeshio"
+    },
+    {
+        "repository": "HTM---Hunter-Task-Manager",
+        "owner": "wudayu"
+    },
+    {
+        "repository": "ROSpberryCar_Stellaris_MCU",
+        "owner": "jotaemesousa"
+    },
+    {
+        "repository": "clojure-koans",
+        "owner": "yerinle"
+    },
+    {
+        "repository": "ohtu2013",
+        "owner": "ahathoor"
+    },
+    {
+        "repository": "LZHAM",
+        "owner": "gameclosure"
+    },
+    {
+        "repository": "scoj",
+        "owner": "slixurd"
+    },
+    {
+        "repository": "BFST",
+        "owner": "Capsup"
+    },
+    {
+        "repository": "pixi.js",
+        "owner": "nvdnkpr"
+    },
+    {
+        "repository": "lsug-website",
+        "owner": "andrericardo"
+    },
+    {
+        "repository": "project",
+        "owner": "chiragdhuvad"
+    },
+    {
+        "repository": "OLGhostAlertView",
+        "owner": "nvdnkpr"
+    },
+    {
+        "repository": "RevealJsPackage",
+        "owner": "echo511"
+    },
+    {
+        "repository": "intro.js",
+        "owner": "Bubujka"
+    },
+    {
+        "repository": "apresentacao",
+        "owner": "nogsantos-ufg"
+    },
+    {
+        "repository": "gradle-cf-plugin",
+        "owner": "jamroks"
+    },
+    {
+        "repository": "shridhar",
+        "owner": "chiragdhuvad"
+    },
+    {
+        "repository": "ember.js",
+        "owner": "imdeany"
+    },
+    {
+        "repository": "JavaFx-structure-demo",
+        "owner": "SlevinBE"
+    },
+    {
+        "repository": "gerrit",
+        "owner": "jozefs"
+    },
+    {
+        "repository": "MyBlog",
+        "owner": "liushuaikobe"
+    },
+    {
+        "repository": "blog",
+        "owner": "onkarrails"
+    },
+    {
+        "repository": "Casall-Bra-Guide",
+        "owner": "LarryTewonder"
+    }
+]

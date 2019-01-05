@@ -10,6 +10,7 @@
     "build": "npm run clean && tsc -p .",
     "clean": "rm -rf dist",
     "limit": "npm run build && node dist/index.js --justShow",
+    "gen-input": "npm run build && node dist/index.js justInput",
     "test": "jest"
   },
   "keywords": [
@@ -32,10 +33,11 @@
     "typescript-json-schema": "^0.33.0"
   },
   "dependencies": {
+    "@octokit/plugin-throttling": "^2.0.0",
     "@octokit/rest": "^16.3.0",
     "axios": "^0.18.0",
     "dotenv": "^6.2.0",
-    "node-fetch": "^2.3.0",
-    "moment": "^2.23.0"
+    "moment": "^2.23.0",
+    "node-fetch": "^2.3.0"
   }
 }
