@@ -6,7 +6,7 @@ import { config } from './environment'
 import * as moment from 'moment';
 
 import { crawlRepositories, CrawlResult } from './repos'
-import { RepositoryModel, RepoIdentifier } from './model'
+import { RepositoryModel, RepoIdentifier,LanguageUsage } from './model'
 import { showLimits, getRateLimit } from './showlimit'
 import { Configuration } from 'tslint';
 import { textSpanContainsPosition } from 'typescript';
@@ -16,8 +16,7 @@ export interface FullConfiguration {
     outputFile: string;
     outputSearch: string;
     outputFolder: string;
-    apriori_Topics: string;
-    apriori_Language: string;
+    apriori_Matrix: string;
     knownIdsFile: string;
 
     statiticsFile: string;
@@ -31,7 +30,9 @@ export interface FullConfiguration {
     flattenOutput: boolean;
     skipTodo: boolean;
 
-    MAX_SEARCH: number
+    MAX_SEARCH: number;
+    MAX_HEADER_TYPE:number;
+    MAX_HEADER_LANG:number;
 }
 
 export interface Configuration extends Partial<FullConfiguration> { }
@@ -40,8 +41,7 @@ const DEFAULT_CONFIG: FullConfiguration = {
 
     outputFolder: 'results',
     outputFile: 'output.json',
-    apriori_Topics: 'api_topics.json',
-    apriori_Language: 'api_language.json',
+    apriori_Matrix: 'apirioriMatrix.json',
     outputSearch: 'searchedRepos.json',
     knownIdsFile: 'knownIds.json',
     statiticsFile: 'stats.json',
@@ -56,7 +56,10 @@ const DEFAULT_CONFIG: FullConfiguration = {
     flattenOutput: true,
     skipTodo: false,
 
-    MAX_SEARCH: 1000
+    MAX_SEARCH: 1000,
+    MAX_HEADER_LANG: 30,
+    MAX_HEADER_TYPE: 30
+
 }
 
 const gitApi = new Octokit({
@@ -97,11 +100,11 @@ async function sleep(ms) {
         setTimeout(resolve, ms)
     })
 }
-export async function generateApriori(gitApi: Octokit, config: Configuration = {}): Promise<void> {
-    let fullConfig = { ...DEFAULT_CONFIG, ...config };
+export async function generateApriori(gitApi: Octokit, partialConfig: Configuration = {}): Promise<void> {
+    let config = { ...DEFAULT_CONFIG, ...partialConfig };
     console.log('start crawling topics');
 
-    let filePath = path.join(fullConfig.outputFolder, fullConfig.outputFile);
+    let filePath = path.join(config.outputFolder, config.outputFile);
     const input: Array<RepositoryModel> = JSON.parse(fs.readFileSync(filePath).toString());
     console.info('loaded ' + input.length + ' repos');
 
@@ -134,22 +137,23 @@ export async function generateApriori(gitApi: Octokit, config: Configuration = {
     let topLanguages = Array.from(LanguagesMap.entries()).sort(sortEntrys);
     let topTopics = Array.from(TopicsMap.entries()).sort(sortEntrys);
 
-    topTopics.map((value: [string, number], index) => {
-        return value[0]
-    });
+    
 
-    const TOP_WANTED = 30;
+    let reduceToKey = (val:[string,number], index) =>{ return val[0]}
+    const topicHeader :Array<string> = topTopics.map(reduceToKey).slice(0, config.MAX_HEADER_TYPE);
+    const langHader : Array<string> = topLanguages.map(reduceToKey).slice(0, config.MAX_HEADER_LANG);
 
-    console.info(`Top Languages: ${topLanguages.slice(0, TOP_WANTED)}`);
-    console.info(`Top Topics: ${topTopics.slice(0, TOP_WANTED)}`);
-
-    let output = JSON.stringify({ topTopics: topTopics, topLanguags: topLanguages, topics: TopicsMap, languages: LanguagesMap })
-    let statsPath = path.join(fullConfig.outputFolder, fullConfig.statiticsFile)
-    let topicPath = path.join(fullConfig.outputFolder, 'map_topics.json');
-    let langPath = path.join(fullConfig.outputFolder, 'map_languages.json');
-
-   /// await generateApriori(input, fullConfig, )
-    fs.promises.writeFile(statsPath, output);
+    console.info(
+     `--->Most ${config.MAX_HEADER_TYPE} Topics: 
+     ${topicHeader} 
+        
+     ---> Most ${config.MAX_HEADER_LANG} Languages: 
+     ${langHader} `);
+   
+     await saveAprioriMatrix(input,langHader,topicHeader, config  )
+   
+    let topicPath = path.join(config.outputFolder, 'map_topics.json');
+    let langPath = path.join(config.outputFolder, 'map_languages.json');
     let topicsOut: Array<any> = Array.from(TopicsMap.entries()).map(
         (val: [string, number]) => { 
             let result={}
@@ -166,13 +170,44 @@ export async function generateApriori(gitApi: Octokit, config: Configuration = {
     fs.promises.writeFile(langPath, JSON.stringify(langOut));
 
 }
-export async function generateInputFile(gitApi: Octokit, config: Configuration = {}): Promise<void> {
-    let fullConfig = { ...DEFAULT_CONFIG, ...config };
+export async function saveAprioriMatrix(
+    input: Array<RepositoryModel>,
+    langHader: Array<string>,
+    topicHeader: Array<string>, 
+    config: FullConfiguration  )
+    :Promise<void>{
+        let result:Array<{any}> = [];
+        
+        console.info('compute Apriori Matrix for '+input.length+' repos');
+        const reducelangUsage = (val:LanguageUsage)=>{return val.name};
+        for(let repo of input){
+            let entry:any = {};
+            entry.id = repo.id;
+            entry.name= repo.fullRepoName;
+            
+            for(let lang of langHader){
+                let langs = repo.usedLanguages.map(reducelangUsage);
+                let hasIt = langs.includes(lang);
+                entry[lang]= hasIt;
+            }
+            for(let topic of topicHeader){
+                let hasIt=  repo.topics.includes(topic);
+                entry[topic]= hasIt;
+            }
+            result.push(entry);    
+        }
+        const output = JSON.stringify(result,null,2);
+        const filePath = path.join(config.outputFolder, config.apriori_Matrix);
+        fs.promises.writeFile(filePath, output);
+}
+
+export async function generateInputFile(gitApi: Octokit, partialConfig: Configuration = {}): Promise<void> {
+    let config = { ...DEFAULT_CONFIG, ...partialConfig };
 
     console.log('here we go');
     const result: Array<RepoIdentifier> = [];
     let page = 0;
-    for (let i = 0; result.length < fullConfig.MAX_SEARCH; i++) {
+    for (let i = 0; result.length < config.MAX_SEARCH; i++) {
         try {
             const respone = await gitApi.search.repos({
                 per_page: 100,
@@ -202,7 +237,7 @@ export async function generateInputFile(gitApi: Octokit, config: Configuration =
             console.log(error)
 
             if (error.status === 422) {
-                return await saveInputSearch(result, fullConfig);
+                return await saveInputSearch(result, config);
             }
             const rateLimit = await getRateLimit(gitApi);
             const remaining = rateLimit.resources.search.remaining;
@@ -216,15 +251,14 @@ export async function generateInputFile(gitApi: Octokit, config: Configuration =
         }
     }
     console.log('done search');
-    await saveInputSearch(result, fullConfig);
+    await saveInputSearch(result, config);
 
 }
 export async function loadRepositories(config: Configuration = {}): Promise<CrawlResult> {
     let fullConfig = { ...DEFAULT_CONFIG, ...config }
 
     const repoIds = await loadRepoList(fullConfig);
-    saveToKnownIds(repoIds,fullConfig);
-    
+    saveInputSearch(repoIds, fullConfig);
     const crawlResult = await crawlRepositories(repoIds, gitApi, fullConfig);
 
     await saveResults(crawlResult, fullConfig);
