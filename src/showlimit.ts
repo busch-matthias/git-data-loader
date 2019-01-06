@@ -6,7 +6,7 @@ import { promises } from 'fs';
 export class Limit{
     limit: number;
     remaining: number;
-    reset: string;
+    reset: number;
 }
 export class APILimit{
     resources:{core: Limit;

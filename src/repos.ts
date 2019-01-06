@@ -1,7 +1,7 @@
 import * as Octokit from '@octokit/rest';
 import * as moment from 'moment';
 
-import { FullConfiguration } from './index'
+import { FullConfiguration, saveResults } from './index'
 import { RepositoryModel, Contributer, LanguageUsage, RepoIdentifier } from './model'
 import { getRateLimit } from './showlimit'
 
@@ -91,6 +91,10 @@ export async function crawlRepositories(
                 console.log("Will save current result")
                 return result;
             }
+        }
+        if(i%100 ==0){
+            console.info('save temporary Result');
+            saveResults(result, config);
         }
 
     }
@@ -183,7 +187,9 @@ async function createLanguages(
     const response = await gitApi.repos.listLanguages({ owner: repostoriy.owner, repo: repostoriy.repository })
     checkForLimitError(repostoriy, response);
 
-    const result: Array<LanguageUsage> = [];
+    const result: Array<LanguageUsage> = [];    
+    
+    
     Object.keys(response.data).forEach(
         (key) => {
             result.push({

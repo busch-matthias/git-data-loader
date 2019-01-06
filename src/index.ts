@@ -3,15 +3,23 @@ import * as path from 'path';
 
 import * as Octokit from '@octokit/rest';
 import { config } from './environment'
+import * as moment from 'moment';
 
 import { crawlRepositories, CrawlResult } from './repos'
 import { RepositoryModel, RepoIdentifier } from './model'
-import { showLimits } from './showlimit'
+import { showLimits, getRateLimit } from './showlimit'
 import { Configuration } from 'tslint';
+import { textSpanContainsPosition } from 'typescript';
+import { mapDefined } from 'tslint/lib/utils';
 
 export interface FullConfiguration {
     outputFile: string;
+    outputSearch: string;
     outputFolder: string;
+    apriori_Topics: string;
+    apriori_Language: string;
+    knownIdsFile: string;
+
     statiticsFile: string;
     inputFolder: string;
     inputFile: string;
@@ -22,26 +30,33 @@ export interface FullConfiguration {
     shouldConsoleLog: boolean;
     flattenOutput: boolean;
     skipTodo: boolean;
+
+    MAX_SEARCH: number
 }
 
 export interface Configuration extends Partial<FullConfiguration> { }
 
 const DEFAULT_CONFIG: FullConfiguration = {
 
-    outputFile: 'output.json',
     outputFolder: 'results',
-
+    outputFile: 'output.json',
+    apriori_Topics: 'api_topics.json',
+    apriori_Language: 'api_language.json',
+    outputSearch: 'searchedRepos.json',
+    knownIdsFile: 'knownIds.json',
     statiticsFile: 'stats.json',
 
     inputFolder: 'repo_input',
-    inputFile: 'repos.json',
+    inputFile: 'input.json',
     todoFile: 'todo.json',
     fishyFile: 'naughtyRepos.json',
 
     shoudOverrideOutput: false,
     shouldConsoleLog: false,
     flattenOutput: true,
-    skipTodo: false
+    skipTodo: false,
+
+    MAX_SEARCH: 1000
 }
 
 const gitApi = new Octokit({
@@ -63,9 +78,12 @@ async function main() {
 
     if (args.includes('--justShow') || args.includes('justShow')) {
         showLimits(gitApi);
+
     } else if (args.includes('--justInput') || args.includes('justInput')) {
         await generateInputFile(gitApi);
-
+        await showLimits(gitApi);
+    } else if (args.includes('--justTopics') || args.includes('justTopics')) {
+        await generateApriori(gitApi);
     } else {
 
         await loadRepositories();
@@ -73,18 +91,140 @@ async function main() {
 
     }
 }
+
+async function sleep(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms)
+    })
+}
+export async function generateApriori(gitApi: Octokit, config: Configuration = {}): Promise<void> {
+    let fullConfig = { ...DEFAULT_CONFIG, ...config };
+    console.log('start crawling topics');
+
+    let filePath = path.join(fullConfig.outputFolder, fullConfig.outputFile);
+    const input: Array<RepositoryModel> = JSON.parse(fs.readFileSync(filePath).toString());
+    console.info('loaded ' + input.length + ' repos');
+
+    let LanguagesMap = new Map<String, number>();
+    let TopicsMap = new Map<String, number>();
+
+    let increaseEntry = (map: Map<String, number>, entry: string): void => {
+        let current = map.has(entry) ? map.get(entry) + 1 : 1;
+        map.set(entry, current);
+    }
+    for (let currentRepo of input) {
+
+        if (currentRepo.usedLanguages) {
+            currentRepo.usedLanguages.forEach((value, index) => {
+                increaseEntry(LanguagesMap, value.name);
+            })
+        } else {
+            console.info(currentRepo.id + " has no languages")
+        }
+        if (currentRepo.topics) {
+            currentRepo.topics.forEach((value, index) => {
+                increaseEntry(TopicsMap, value);
+            })
+        } else {
+            console.info(currentRepo.id + " has no topics")
+        }
+    }
+    let sortEntrys = (a: [String, number], b: [String, number]): number => { return b[1] - a[1] };
+
+    let topLanguages = Array.from(LanguagesMap.entries()).sort(sortEntrys);
+    let topTopics = Array.from(TopicsMap.entries()).sort(sortEntrys);
+
+    topTopics.map((value: [string, number], index) => {
+        return value[0]
+    });
+
+    const TOP_WANTED = 30;
+
+    console.info(`Top Languages: ${topLanguages.slice(0, TOP_WANTED)}`);
+    console.info(`Top Topics: ${topTopics.slice(0, TOP_WANTED)}`);
+
+    let output = JSON.stringify({ topTopics: topTopics, topLanguags: topLanguages, topics: TopicsMap, languages: LanguagesMap })
+    let statsPath = path.join(fullConfig.outputFolder, fullConfig.statiticsFile)
+    let topicPath = path.join(fullConfig.outputFolder, 'map_topics.json');
+    let langPath = path.join(fullConfig.outputFolder, 'map_languages.json');
+
+   /// await generateApriori(input, fullConfig, )
+    fs.promises.writeFile(statsPath, output);
+    let topicsOut: Array<any> = Array.from(TopicsMap.entries()).map(
+        (val: [string, number]) => { 
+            let result={}
+            result[val[0]] = val[1]
+            return result;
+        })
+    let langOut:Array<any> = Array.from(LanguagesMap.entries()).map(
+        (val: [string, number]) => { 
+            let result={}
+            result[val[0]] = val[1]
+            return result;
+        })
+    fs.promises.writeFile(topicPath, JSON.stringify(topicsOut));
+    fs.promises.writeFile(langPath, JSON.stringify(langOut));
+
+}
 export async function generateInputFile(gitApi: Octokit, config: Configuration = {}): Promise<void> {
     let fullConfig = { ...DEFAULT_CONFIG, ...config };
 
     console.log('here we go');
-    let response = await gitApi.repos.listPublic({ per_page: 100 });
+    const result: Array<RepoIdentifier> = [];
+    let page = 0;
+    for (let i = 0; result.length < fullConfig.MAX_SEARCH; i++) {
+        try {
+            const respone = await gitApi.search.repos({
+                per_page: 100,
+                page: page,
+                q: 'topics:>1',
+                sort: 'stars',
+                order: 'asc'
+            });
+            page += 1;
+
+            let repos = respone.data.items;
+
+            for (let currentIndex = 0; repos.length; currentIndex++) {
+                let currentRepo = repos[currentIndex];
+                //console.log(currentRepo)
+                result.push(
+                    {
+                        owner: currentRepo.owner.login,
+                        repository: currentRepo.name
+                    })
+
+            }
+            console.log('loaded prepos: ' + result.length)
+            console.log('loaded page: ' + page + ' with ' + repos.length + ' repos');
+        } catch (error) {
+            console.log('We got an error at page' + i)
+            console.log(error)
+
+            if (error.status === 422) {
+                return await saveInputSearch(result, fullConfig);
+            }
+            const rateLimit = await getRateLimit(gitApi);
+            const remaining = rateLimit.resources.search.remaining;
+
+            const resetAt = moment(rateLimit.resources.search.reset * 1000);
+            const waitFor = moment().diff(resetAt, 'milliseconds')
+            if (remaining < 1) {
+                console.log('will wait for ' + waitFor + ' ms')
+                await sleep(waitFor)
+            }
+        }
+    }
+    console.log('done search');
+    await saveInputSearch(result, fullConfig);
 
 }
 export async function loadRepositories(config: Configuration = {}): Promise<CrawlResult> {
     let fullConfig = { ...DEFAULT_CONFIG, ...config }
 
     const repoIds = await loadRepoList(fullConfig);
-
+    saveToKnownIds(repoIds,fullConfig);
+    
     const crawlResult = await crawlRepositories(repoIds, gitApi, fullConfig);
 
     await saveResults(crawlResult, fullConfig);
@@ -100,10 +240,20 @@ export async function loadRepositories(config: Configuration = {}): Promise<Craw
     }
     return crawlResult;
 }
-
+async function saveToKnownIds(newIds: Array<RepoIdentifier>, config: FullConfiguration) {
+    console.info('first save known ids');
+    const knownPath = path.join(config.outputFolder, config.knownIdsFile)
+    let loadedIds = newIds;
+    if(fs.existsSync(knownPath)){
+        let existingRepos: Array<RepoIdentifier> = JSON.parse(fs.readFileSync(knownPath).toString());
+        loadedIds = loadedIds.concat(existingRepos);
+    }
+    fs.promises.writeFile(knownPath, JSON.stringify(loadedIds));
+    
+}
 async function loadRepoList(config: FullConfiguration): Promise<Array<RepoIdentifier>> {
     const inputPath: string = path.join(config.inputFolder, config.inputFile);
-    const todoPath: string = path.join(config.inputFolder, config.todoFile);
+    const todoPath: string = path.join(config.outputFolder, config.todoFile);
 
     let read = (path: string, ): Array<RepoIdentifier> => {
         const input: Array<RepoIdentifier> = JSON.parse(fs.readFileSync(path).toString());
@@ -123,12 +273,11 @@ async function loadRepoList(config: FullConfiguration): Promise<Array<RepoIdenti
     }
 
 }
-async function saveResults(cralwResult: CrawlResult, config: FullConfiguration): Promise<void> {
+export async function saveResults(cralwResult: CrawlResult, config: FullConfiguration): Promise<void> {
 
     if (!fs.existsSync(config.outputFolder)) {
         fs.mkdirSync(config.outputFolder)
     }
-
     const outputPath = path.join(config.outputFolder, config.outputFile);
 
     let loaded = cralwResult.loadedRepos;
@@ -136,7 +285,7 @@ async function saveResults(cralwResult: CrawlResult, config: FullConfiguration):
         if (fs.existsSync(outputPath)) {
             let existingRepos: Array<RepositoryModel> = JSON.parse(fs.readFileSync(outputPath).toString());
             console.log('loaded existing repos:  ' + existingRepos.length)
-            loaded= loaded.concat(existingRepos);
+            loaded = loaded.concat(existingRepos);
         }
     }
 
@@ -152,6 +301,19 @@ async function saveResults(cralwResult: CrawlResult, config: FullConfiguration):
 
     await fs.promises.writeFile(outputPath, output);
 }
+async function saveInputSearch(inputRepos: Array<RepoIdentifier>, config: FullConfiguration) {
+    if (!fs.existsSync(config.outputFolder)) {
+        fs.mkdirSync(config.outputFolder)
+    }
+    const outputPath = path.join(config.outputFolder, config.outputSearch);
+    let loaded = inputRepos;
+    if (fs.existsSync(outputPath)) {
+        let existingIds: Array<RepoIdentifier> = JSON.parse(fs.readFileSync(outputPath).toString());
+        console.log('loaded existing ids:  ' + existingIds.length)
+        loaded = loaded.concat(existingIds);
+    }
+    await fs.promises.writeFile(outputPath, JSON.stringify(loaded));
+}
 
 async function saveTodos(cralwResult: CrawlResult, config: FullConfiguration): Promise<void> {
     if (!fs.existsSync(config.outputFolder)) {
@@ -159,6 +321,8 @@ async function saveTodos(cralwResult: CrawlResult, config: FullConfiguration): P
     }
     const todoPath = path.join(config.outputFolder, config.todoFile);
     const todoOutput = JSON.stringify(cralwResult.todoRepos, null, 2)
+    
+   
     console.info("<<====>>>>><<<<<<<<>>>>>>><<<<<<====>>")
     console.info("we have still " + cralwResult.todoRepos.length + " repos todo");
 
@@ -170,5 +334,5 @@ async function saveFishy(cralwResult: CrawlResult, config: FullConfiguration): P
         fs.mkdirSync(config.outputFolder)
     }
     const fishyPath = path.join(config.outputFolder, config.fishyFile);
-    await fs.promises.writeFile(fishyPath, JSON.stringify(cralwResult.fhisyRepos, null, 3));
+    await fs.promises.appendFile(fishyPath, JSON.stringify(cralwResult.fhisyRepos, null, 3));
 }
