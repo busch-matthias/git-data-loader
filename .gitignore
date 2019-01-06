@@ -4,6 +4,7 @@
 
 ### Application-Build ###
 dist/*
+analytics/*
 
 ### Node ###
 # Logs
