@@ -367,6 +367,11 @@ async function saveFishy(cralwResult: CrawlResult, config: FullConfiguration): P
     if (!fs.existsSync(config.outputFolder)) {
         fs.mkdirSync(config.outputFolder)
     }
+    const loaded = cralwResult.fhisyRepos;
     const fishyPath = path.join(config.outputFolder, config.fishyFile);
-    await fs.promises.appendFile(fishyPath, JSON.stringify(cralwResult.fhisyRepos, null, 3));
+    let existing =[];
+    if(fs.existsSync(fishyPath)){
+        existing = JSON.parse(fs.readFileSync(fishyPath).toString())
+    }
+    await fs.promises.writeFile(fishyPath, JSON.stringify(loaded.concat(existing), null, 3));
 }
