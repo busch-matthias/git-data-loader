@@ -84,7 +84,7 @@ export async function crawlRepositories(
             console.error(e);
             const rateLimit = await getRateLimit(gitApi);
             const remaining = rateLimit.resources.core.remaining;
-            if (remaining > CALLS_PER_REPO) {
+            if (remaining > config.CALLS_PER_REPO) {
                 console.log(`What ever happend...\n try to delete (${currentId.owner}/${currentId.repository}) from input. we still have ${remaining} calls`);
                 result.saveAsFishy(currentId)
             } else {
@@ -92,7 +92,7 @@ export async function crawlRepositories(
                 return result;
             }
         }
-        if(i%100 ==0){
+        if(i%200 ==0){
             console.info('save temporary Result');
             saveResults(result, config);
         }

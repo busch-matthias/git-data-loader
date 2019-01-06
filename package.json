@@ -6,12 +6,12 @@
   "scripts": {
     "init-env": "cp .example.env .env",
     "watch": "nodemon --delay 5 --watch src --nolazy --exec node -r ts-node/register src/index.ts",
-    "go": "npm run build && node dist/index.js",
+    "go": "ts-node src/index.ts",
     "build": "npm run clean && tsc -p .",
     "clean": "rm -rf dist",
-    "limit": "npm run build && node dist/index.js --justShow",
-    "gen-input": "npm run build && node dist/index.js --justInput",
-    "gen-Topics": "npm run build && node dist/index.js --justTopics",
+    "limit": "ts-node src/index.ts --justShow",
+    "gen-input": "ts-node src/index.ts --justInput",
+    "gen-analyticData": "ts-node src/index.ts --justAnalysisData",
     "test": "jest"
   },
   "keywords": [

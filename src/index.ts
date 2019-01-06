@@ -6,18 +6,22 @@ import { config } from './environment'
 import * as moment from 'moment';
 
 import { crawlRepositories, CrawlResult } from './repos'
-import { RepositoryModel, RepoIdentifier,LanguageUsage } from './model'
+import { RepositoryModel, RepoIdentifier, LanguageUsage } from './model'
 import { showLimits, getRateLimit } from './showlimit'
 import { Configuration } from 'tslint';
-import { textSpanContainsPosition } from 'typescript';
-import { mapDefined } from 'tslint/lib/utils';
+import { stringify } from 'querystring';
 
 export interface FullConfiguration {
     outputFile: string;
     outputSearch: string;
     outputFolder: string;
-    apriori_Matrix: string;
     knownIdsFile: string;
+
+    analyticsFolder: string;
+    apriori_Matrix: string;
+    langMap: string;
+    topicsMap: string;
+    repoModelFile: string;
 
     statiticsFile: string;
     inputFolder: string;
@@ -31,20 +35,26 @@ export interface FullConfiguration {
     skipTodo: boolean;
 
     MAX_SEARCH: number;
-    MAX_HEADER_TYPE:number;
-    MAX_HEADER_LANG:number;
+    MAX_HEADER_TYPE: number;
+    MAX_HEADER_LANG: number;
+    CALLS_PER_REPO: number;
 }
-
 export interface Configuration extends Partial<FullConfiguration> { }
 
 const DEFAULT_CONFIG: FullConfiguration = {
 
     outputFolder: 'results',
     outputFile: 'output.json',
-    apriori_Matrix: 'apirioriMatrix.json',
     outputSearch: 'searchedRepos.json',
     knownIdsFile: 'knownIds.json',
+
     statiticsFile: 'stats.json',
+
+    analyticsFolder: 'analytics',
+    apriori_Matrix: 'Matrix_apriori.json',
+    topicsMap: 'Map_topics.json',
+    langMap: 'Map_language.json',
+    repoModelFile: 'RepoData.json',
 
     inputFolder: 'repo_input',
     inputFile: 'input.json',
@@ -56,9 +66,10 @@ const DEFAULT_CONFIG: FullConfiguration = {
     flattenOutput: true,
     skipTodo: false,
 
-    MAX_SEARCH: 1000,
-    MAX_HEADER_LANG: 30,
-    MAX_HEADER_TYPE: 30
+    MAX_SEARCH: 2000,
+    MAX_HEADER_LANG: 60,
+    MAX_HEADER_TYPE: 60,
+    CALLS_PER_REPO: 4
 
 }
 
@@ -77,6 +88,7 @@ gitApi.authenticate({
 main();
 
 async function main() {
+
     let args = process.argv || []
 
     if (args.includes('--justShow') || args.includes('justShow')) {
@@ -85,11 +97,21 @@ async function main() {
     } else if (args.includes('--justInput') || args.includes('justInput')) {
         await generateInputFile(gitApi);
         await showLimits(gitApi);
-    } else if (args.includes('--justTopics') || args.includes('justTopics')) {
-        await generateApriori(gitApi);
+    } else if (args.includes('--justAnalysisData') || args.includes('justAnalysisData')) {
+        await generateAnalysisData();
     } else {
+        let todoPath = path.join(DEFAULT_CONFIG.outputFolder, DEFAULT_CONFIG.todoFile)
+        do {
+            await loadRepositories(gitApi);
+            const limit = await getRateLimit(gitApi);
+            if (limit.resources.core.remaining < DEFAULT_CONFIG.CALLS_PER_REPO) {
+                console.info('no calls left, should rest, check for todo')
+                break;
+            }
+        } while (fs.existsSync(todoPath))
 
-        await loadRepositories();
+
+        await generateAnalysisData()
         await showLimits(gitApi);
 
     }
@@ -100,9 +122,9 @@ async function sleep(ms) {
         setTimeout(resolve, ms)
     })
 }
-export async function generateApriori(gitApi: Octokit, partialConfig: Configuration = {}): Promise<void> {
+export async function generateAnalysisData(partialConfig: Configuration = {}): Promise<void> {
     let config = { ...DEFAULT_CONFIG, ...partialConfig };
-    console.log('start crawling topics');
+    console.log('-------Start building files for data analysis--------');
 
     let filePath = path.join(config.outputFolder, config.outputFile);
     const input: Array<RepositoryModel> = JSON.parse(fs.readFileSync(filePath).toString());
@@ -116,7 +138,6 @@ export async function generateApriori(gitApi: Octokit, partialConfig: Configurat
         map.set(entry, current);
     }
     for (let currentRepo of input) {
-
         if (currentRepo.usedLanguages) {
             currentRepo.usedLanguages.forEach((value, index) => {
                 increaseEntry(LanguagesMap, value.name);
@@ -137,70 +158,119 @@ export async function generateApriori(gitApi: Octokit, partialConfig: Configurat
     let topLanguages = Array.from(LanguagesMap.entries()).sort(sortEntrys);
     let topTopics = Array.from(TopicsMap.entries()).sort(sortEntrys);
 
-    
 
-    let reduceToKey = (val:[string,number], index) =>{ return val[0]}
-    const topicHeader :Array<string> = topTopics.map(reduceToKey).slice(0, config.MAX_HEADER_TYPE);
-    const langHader : Array<string> = topLanguages.map(reduceToKey).slice(0, config.MAX_HEADER_LANG);
 
-    console.info(
-     `--->Most ${config.MAX_HEADER_TYPE} Topics: 
-     ${topicHeader} 
-        
-     ---> Most ${config.MAX_HEADER_LANG} Languages: 
-     ${langHader} `);
-   
-     await saveAprioriMatrix(input,langHader,topicHeader, config  )
-   
-    let topicPath = path.join(config.outputFolder, 'map_topics.json');
-    let langPath = path.join(config.outputFolder, 'map_languages.json');
-    let topicsOut: Array<any> = Array.from(TopicsMap.entries()).map(
-        (val: [string, number]) => { 
-            let result={}
-            result[val[0]] = val[1]
-            return result;
-        })
-    let langOut:Array<any> = Array.from(LanguagesMap.entries()).map(
-        (val: [string, number]) => { 
-            let result={}
-            result[val[0]] = val[1]
-            return result;
-        })
+    let reduceToKey = (val: [string, number], index) => { return val[0] }
+    const topicHeader: Array<string> = topTopics.map(reduceToKey).slice(0, config.MAX_HEADER_TYPE);
+    const langHader: Array<string> = topLanguages.map(reduceToKey).slice(0, config.MAX_HEADER_LANG);
+
+    console.info(`--->Most ${config.MAX_HEADER_TYPE} Topics: \n${topicHeader}\n\n---> Most ${config.MAX_HEADER_LANG} Languages:\n${langHader}\n `);
+
+    saveAprioriMatrix(input, langHader, topicHeader, config)
+    saveClassifierData(input, langHader, topicHeader, config)
+    saveMapData(TopicsMap, LanguagesMap, config)
+
+
+}
+export async function saveMapData(topics: Map<String, number>, langs: Map<String, number>, config: FullConfiguration): Promise<void> {
+    if (!fs.existsSync(config.analyticsFolder)) {
+        fs.mkdirSync(config.analyticsFolder)
+    }
+    let topicPath = path.join(config.analyticsFolder, config.topicsMap);
+    let langPath = path.join(config.analyticsFolder, config.langMap);
+
+    let genObject = (val: [string, number]) => {
+        let result = {}
+        result[val[0]] = val[1]
+        return result;
+    };
+
+    let topicsOut: Array<any> = Array.from(topics.entries()).map(genObject)
+    let langOut: Array<any> = Array.from(langs.entries()).map(genObject);
+
     fs.promises.writeFile(topicPath, JSON.stringify(topicsOut));
     fs.promises.writeFile(langPath, JSON.stringify(langOut));
-
 }
 export async function saveAprioriMatrix(
     input: Array<RepositoryModel>,
     langHader: Array<string>,
-    topicHeader: Array<string>, 
-    config: FullConfiguration  )
-    :Promise<void>{
-        let result:Array<{any}> = [];
-        
-        console.info('compute Apriori Matrix for '+input.length+' repos');
-        const reducelangUsage = (val:LanguageUsage)=>{return val.name};
-        for(let repo of input){
-            let entry:any = {};
-            entry.id = repo.id;
-            entry.name= repo.fullRepoName;
-            
-            for(let lang of langHader){
-                let langs = repo.usedLanguages.map(reducelangUsage);
-                let hasIt = langs.includes(lang);
-                entry[lang]= hasIt;
-            }
-            for(let topic of topicHeader){
-                let hasIt=  repo.topics.includes(topic);
-                entry[topic]= hasIt;
-            }
-            result.push(entry);    
-        }
-        const output = JSON.stringify(result,null,2);
-        const filePath = path.join(config.outputFolder, config.apriori_Matrix);
-        fs.promises.writeFile(filePath, output);
-}
+    topicHeader: Array<string>,
+    config: FullConfiguration)
+    : Promise<void> {
 
+    
+    let result: Array<{ any }> = [];
+    console.info('compute Apriori Matrix for ' + input.length + ' repos');
+    const reducelangUsage = (val: LanguageUsage) => { return val.name };
+    for (let repo of input) {
+        let entry: any = {};
+        entry.id = repo.id;
+        entry.name = repo.fullRepoName;
+
+        for (let lang of langHader) {
+            let langs = repo.usedLanguages.map(reducelangUsage);
+            let hasIt = langs.includes(lang);
+            entry[lang] = hasIt ? 1 : 0;//it is easyer to parse that way..
+        }
+        for (let topic of topicHeader) {
+            let hasIt = repo.topics.includes(topic);
+            entry['t_' + topic] = hasIt ? 1 : 0; //it is easyer to parse that way..
+        }
+        result.push(entry);
+    }
+    if (!fs.existsSync(config.analyticsFolder)) {
+        fs.mkdirSync(config.analyticsFolder)
+    }
+    const output = JSON.stringify(result, null, 2);
+    const filePath = path.join(config.analyticsFolder, config.apriori_Matrix);
+    fs.promises.writeFile(filePath, output);
+}
+export async function saveClassifierData(
+    input: Array<RepositoryModel>,
+    langHader: Array<string>,
+    topicHeader: Array<string>,
+    config: FullConfiguration)
+    : Promise<void> {
+
+    console.info('compute ClassifierData for ' + input.length + ' repos');
+
+    let reduceContributers = (repo: RepositoryModel): number => {
+        return repo.contributers.length;
+    };
+    let reduceTopics = (result: any, repo: RepositoryModel) => {
+        for (let topic of topicHeader) {
+            result['t_' + topic] = repo.topics.includes(topic) ? 1 : 0;
+        }
+    };
+    let reduceLanguages = (result: any, repo: RepositoryModel) => {
+        for (let lang of langHader) {
+            let langMap = new Map<string, number>();
+
+            repo.usedLanguages.forEach((val, i) => {
+                langMap.set(val.name, val.sizeInBytes);
+            })
+            result[lang] = langMap.has(lang) ? langMap.get(lang) : 0;
+        }
+    };
+    let result: Array<{ any }> = [];
+    for (let repo of input) {
+        let entry: any = {}
+        entry.id = repo.id;
+        entry.name = repo.fullRepoName;
+        entry.yearCreated = moment(repo.createdAt).get('year');
+        entry.yearLastUpdated = moment(repo.updatedAt).get('year');
+        entry.sizeInBytes = repo.sizeInBytes;
+        entry.mainLanguage = repo.mainLanguage;
+        entry.forkCount = repo.forkCount;
+        entry.contributers = reduceContributers(repo);
+        reduceTopics(entry, repo);
+        reduceLanguages(entry, repo);
+        result.push(entry);
+    }
+    const output = JSON.stringify(result, null, 2);
+    const filePath = path.join(config.analyticsFolder, config.repoModelFile);
+    fs.promises.writeFile(filePath, output);
+}
 export async function generateInputFile(gitApi: Octokit, partialConfig: Configuration = {}): Promise<void> {
     let config = { ...DEFAULT_CONFIG, ...partialConfig };
 
@@ -212,10 +282,11 @@ export async function generateInputFile(gitApi: Octokit, partialConfig: Configur
             const respone = await gitApi.search.repos({
                 per_page: 100,
                 page: page,
-                q: 'topics:>1',
-                sort: 'stars',
+                q: 'topics:>2',
+                sort: 'updated',
                 order: 'asc'
             });
+            console.info('search yields to ' + respone.data.total_count + ' repos')
             page += 1;
 
             let repos = respone.data.items;
@@ -254,23 +325,24 @@ export async function generateInputFile(gitApi: Octokit, partialConfig: Configur
     await saveInputSearch(result, config);
 
 }
-export async function loadRepositories(config: Configuration = {}): Promise<CrawlResult> {
-    let fullConfig = { ...DEFAULT_CONFIG, ...config }
+export async function loadRepositories(gitApi: Octokit, partialConfig: Configuration = {}): Promise<CrawlResult> {
+    let config = { ...DEFAULT_CONFIG, ...partialConfig }
 
-    const repoIds = await loadRepoList(fullConfig);
-    saveInputSearch(repoIds, fullConfig);
-    const crawlResult = await crawlRepositories(repoIds, gitApi, fullConfig);
+    const repoIds = await loadRepoList(config);
+    //saveToKnownIds(repoIds, fullConfig);
 
-    await saveResults(crawlResult, fullConfig);
+    const crawlResult = await crawlRepositories(repoIds, gitApi, config);
+
+    await saveResults(crawlResult, config);
 
     if (!crawlResult.isFinished()) {
         console.info("Cralw was not finished in one run");
-        await saveTodos(crawlResult, fullConfig);
+        await saveTodos(crawlResult, config);
+    } else {
+        removeTodoFile(config);
     }
     if (crawlResult.hasFishyRepos()) {
-        console.info("<<====>>>>><<<<<<<<>>>>>>><<<<<<====>>");
-        console.info(`there were some fishy repos(${crawlResult.fhisyRepos.length}), we added them to the list`);
-        await saveFishy(crawlResult, fullConfig)
+        await saveFishy(crawlResult, config)
     }
     return crawlResult;
 }
@@ -278,12 +350,12 @@ async function saveToKnownIds(newIds: Array<RepoIdentifier>, config: FullConfigu
     console.info('first save known ids');
     const knownPath = path.join(config.outputFolder, config.knownIdsFile)
     let loadedIds = newIds;
-    if(fs.existsSync(knownPath)){
+    if (fs.existsSync(knownPath)) {
         let existingRepos: Array<RepoIdentifier> = JSON.parse(fs.readFileSync(knownPath).toString());
         loadedIds = loadedIds.concat(existingRepos);
     }
     fs.promises.writeFile(knownPath, JSON.stringify(loadedIds));
-    
+
 }
 async function loadRepoList(config: FullConfiguration): Promise<Array<RepoIdentifier>> {
     const inputPath: string = path.join(config.inputFolder, config.inputFile);
@@ -317,9 +389,17 @@ export async function saveResults(cralwResult: CrawlResult, config: FullConfigur
     let loaded = cralwResult.loadedRepos;
     if (!config.shoudOverrideOutput) {
         if (fs.existsSync(outputPath)) {
+            let rsltMap = new Map<number, RepositoryModel>();
             let existingRepos: Array<RepositoryModel> = JSON.parse(fs.readFileSync(outputPath).toString());
             console.log('loaded existing repos:  ' + existingRepos.length)
-            loaded = loaded.concat(existingRepos);
+
+            let copyToMap = (input: Array<RepositoryModel>): void => {
+                input.forEach((val, i) => { rsltMap.set(val.id, val) })
+            }
+            copyToMap(existingRepos);
+            copyToMap(loaded);
+            loaded = Array.from(rsltMap.values());
+            console.info(`will write ${loaded.length - existingRepos.length} new repositories`)
         }
     }
 
@@ -339,12 +419,19 @@ async function saveInputSearch(inputRepos: Array<RepoIdentifier>, config: FullCo
     if (!fs.existsSync(config.outputFolder)) {
         fs.mkdirSync(config.outputFolder)
     }
+
     const outputPath = path.join(config.outputFolder, config.outputSearch);
     let loaded = inputRepos;
     if (fs.existsSync(outputPath)) {
         let existingIds: Array<RepoIdentifier> = JSON.parse(fs.readFileSync(outputPath).toString());
         console.log('loaded existing ids:  ' + existingIds.length)
         loaded = loaded.concat(existingIds);
+        let noDoublettes = new Map<string, RepoIdentifier>();
+        loaded.forEach((value, index) => {
+            noDoublettes.set(value.owner + '/' + value.repository, value);
+        })
+        loaded = Array.from(noDoublettes.values());
+        console.log(`will save ${loaded.length - existingIds.length} new inputs (total: ${loaded.length})`);
     }
     await fs.promises.writeFile(outputPath, JSON.stringify(loaded));
 }
@@ -355,23 +442,32 @@ async function saveTodos(cralwResult: CrawlResult, config: FullConfiguration): P
     }
     const todoPath = path.join(config.outputFolder, config.todoFile);
     const todoOutput = JSON.stringify(cralwResult.todoRepos, null, 2)
-    
-   
+
+
     console.info("<<====>>>>><<<<<<<<>>>>>>><<<<<<====>>")
     console.info("we have still " + cralwResult.todoRepos.length + " repos todo");
 
     await fs.promises.writeFile(todoPath, todoOutput);
 }
-
+async function removeTodoFile(config: FullConfiguration) {
+    const todoPath = path.join(config.outputFolder, config.todoFile);
+    if (fs.existsSync(todoPath)) {
+        console.info('will delete todo file!!')
+        fs.unlinkSync(todoPath);
+    }
+}
 async function saveFishy(cralwResult: CrawlResult, config: FullConfiguration): Promise<void> {
     if (!fs.existsSync(config.outputFolder)) {
         fs.mkdirSync(config.outputFolder)
     }
     const loaded = cralwResult.fhisyRepos;
     const fishyPath = path.join(config.outputFolder, config.fishyFile);
-    let existing =[];
-    if(fs.existsSync(fishyPath)){
+    let existing = [];
+    if (fs.existsSync(fishyPath)) {
         existing = JSON.parse(fs.readFileSync(fishyPath).toString())
     }
+    console.info("<<====>>>>><<<<<<<<>>>>>>><<<<<<====>>");
+    console.info(`there were some fishy repos(${cralwResult.fhisyRepos.length}), we added them to the list`);
+
     await fs.promises.writeFile(fishyPath, JSON.stringify(loaded.concat(existing), null, 3));
 }
