@@ -11,7 +11,7 @@
     "clean": "rm -rf dist",
     "limit": "ts-node src/index.ts --justShow",
     "gen-input": "ts-node src/index.ts --justInput",
-    "gen-analyticData": "ts-node src/index.ts --justAnalysisData && zip -r -X analytics/data.zip analytics",
+    "gen-analyticData": "ts-node src/index.ts --justAnalysisData && zip -r -X data.zip analytics",
     "test": "jest"
   },
   "keywords": [

@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-
+import * as timers from 'timers';
 import * as Octokit from '@octokit/rest';
 import { config } from './environment'
 import * as moment from 'moment';
@@ -35,7 +35,7 @@ export interface FullConfiguration {
     skipTodo: boolean;
 
     MAX_SEARCH: number;
-    MAX_HEADER_TYPE: number;
+    MAX_HEADER_TOPICS: number;
     MAX_HEADER_LANG: number;
     CALLS_PER_REPO: number;
 }
@@ -66,9 +66,9 @@ const DEFAULT_CONFIG: FullConfiguration = {
     flattenOutput: true,
     skipTodo: false,
 
-    MAX_SEARCH: 2000,
-    MAX_HEADER_LANG: 60,
-    MAX_HEADER_TYPE: 60,
+    MAX_SEARCH: 1000,
+    MAX_HEADER_LANG: 117,
+    MAX_HEADER_TOPICS: 863,
     CALLS_PER_REPO: 4
 
 }
@@ -104,9 +104,22 @@ async function main() {
         do {
             await loadRepositories(gitApi);
             const limit = await getRateLimit(gitApi);
+           
             if (limit.resources.core.remaining < DEFAULT_CONFIG.CALLS_PER_REPO) {
                 console.info('no calls left, should rest, check for todo')
-                break;
+                let resetAt = moment.unix(limit.resources.core.reset+2)
+                console.info('reset-Time:'+(limit.resources.core.reset+2))
+                let waitMs = resetAt.diff(moment(), 'milliseconds');
+
+                
+                console.info('will wait for ' + moment(waitMs).get('minutes').toString() + ' min (now:'+moment().toLocaleString()+')');
+                console.info('next try at : '+ resetAt.toLocaleString())
+                while (waitMs > 2147483646) {
+                    console.info('have to wait for' + moment(waitMs).get('minutes').toString() + 'more min');
+                    await sleep(2147483646);
+                    waitMs -= 2147483646;
+                }
+                await sleep(waitMs);
             }
         } while (fs.existsSync(todoPath))
 
@@ -155,16 +168,16 @@ export async function generateAnalysisData(partialConfig: Configuration = {}): P
     }
     let sortEntrys = (a: [String, number], b: [String, number]): number => { return b[1] - a[1] };
 
-    let topLanguages = Array.from(LanguagesMap.entries()).sort(sortEntrys);
     let topTopics = Array.from(TopicsMap.entries()).sort(sortEntrys);
+    let topLanguages = Array.from(LanguagesMap.entries()).sort(sortEntrys);
 
 
 
     let reduceToKey = (val: [string, number], index) => { return val[0] }
-    const topicHeader: Array<string> = topTopics.map(reduceToKey).slice(0, config.MAX_HEADER_TYPE);
+    const topicHeader: Array<string> = topTopics.map(reduceToKey).slice(0, config.MAX_HEADER_TOPICS);
     const langHader: Array<string> = topLanguages.map(reduceToKey).slice(0, config.MAX_HEADER_LANG);
 
-    console.info(`--->Most ${config.MAX_HEADER_TYPE} Topics: \n${topicHeader}\n\n---> Most ${config.MAX_HEADER_LANG} Languages:\n${langHader}\n `);
+    console.info(`--->Most ${config.MAX_HEADER_TOPICS} Topics: (from ${topTopics.length}) \n${topicHeader}\n\n---> Most ${config.MAX_HEADER_LANG} Languages: (from ${topLanguages.length})\n${langHader}\n `);
 
     saveAprioriMatrix(input, langHader, topicHeader, config)
     saveClassifierData(input, langHader, topicHeader, config)
@@ -198,7 +211,7 @@ export async function saveAprioriMatrix(
     config: FullConfiguration)
     : Promise<void> {
 
-    
+
     let result: Array<{ any }> = [];
     console.info('compute Apriori Matrix for ' + input.length + ' repos');
     const reducelangUsage = (val: LanguageUsage) => { return val.name };
@@ -276,22 +289,23 @@ export async function generateInputFile(gitApi: Octokit, partialConfig: Configur
 
     console.log('here we go');
     const result: Array<RepoIdentifier> = [];
-    let page = 0;
+    let page = 1;
     for (let i = 0; result.length < config.MAX_SEARCH; i++) {
+
         try {
             const respone = await gitApi.search.repos({
                 per_page: 100,
                 page: page,
-                q: 'topics:>2',
+                q: 'size:>20',
                 sort: 'updated',
-                order: 'asc'
+                order: 'desc'
             });
             console.info('search yields to ' + respone.data.total_count + ' repos')
             page += 1;
 
             let repos = respone.data.items;
 
-            for (let currentIndex = 0; repos.length; currentIndex++) {
+            for (let currentIndex = 0; currentIndex < repos.length; currentIndex++) {
                 let currentRepo = repos[currentIndex];
                 //console.log(currentRepo)
                 result.push(
@@ -305,8 +319,11 @@ export async function generateInputFile(gitApi: Octokit, partialConfig: Configur
             console.log('loaded page: ' + page + ' with ' + repos.length + ' repos');
         } catch (error) {
             console.log('We got an error at page' + i)
-            console.log(error)
-
+            if (error instanceof TypeError) {
+                console.info('you know it...')
+            } else {
+                console.log(error)
+            }
             if (error.status === 422) {
                 return await saveInputSearch(result, config);
             }
@@ -314,9 +331,9 @@ export async function generateInputFile(gitApi: Octokit, partialConfig: Configur
             const remaining = rateLimit.resources.search.remaining;
 
             const resetAt = moment(rateLimit.resources.search.reset * 1000);
-            const waitFor = moment().diff(resetAt, 'milliseconds')
+            const waitFor = resetAt.diff(moment(), 'milliseconds')
             if (remaining < 1) {
-                console.log('will wait for ' + waitFor + ' ms')
+                console.log('will wait for ' + waitFor + ' ms (now:'+moment().toLocaleString())
                 await sleep(waitFor)
             }
         }
@@ -436,7 +453,7 @@ async function saveInputSearch(inputRepos: Array<RepoIdentifier>, config: FullCo
     await fs.promises.writeFile(outputPath, JSON.stringify(loaded));
 }
 
-async function saveTodos(cralwResult: CrawlResult, config: FullConfiguration): Promise<void> {
+export async function saveTodos(cralwResult: CrawlResult, config: FullConfiguration): Promise<void> {
     if (!fs.existsSync(config.outputFolder)) {
         fs.mkdirSync(config.outputFolder)
     }

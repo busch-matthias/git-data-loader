@@ -1,5 +1,137 @@
 [
    {
+      "owner": "spritejs",
+      "repository": "spritejs"
+   },
+   {
+      "owner": "Dieken",
+      "repository": "jff"
+   },
+   {
+      "owner": "mrfelcio",
+      "repository": "emacs_conf"
+   },
+   {
+      "owner": "alxmtv",
+      "repository": "ilovefruits"
+   },
+   {
+      "owner": "mbernier85",
+      "repository": "d3-profile"
+   },
+   {
+      "owner": "processing",
+      "repository": "p5.js"
+   },
+   {
+      "owner": "Kicer86",
+      "repository": "photobroom"
+   },
+   {
+      "owner": "CsatiZoltan",
+      "repository": "LaTeX-DiscreteFolder"
+   },
+   {
+      "owner": "phikai",
+      "repository": "htpc-docker-standup"
+   },
+   {
+      "owner": "weepy",
+      "repository": "test"
+   },
+   {
+      "owner": "olivM",
+      "repository": "hydrate"
+   },
+   {
+      "owner": "julesss",
+      "repository": "wlwdeezerplayer"
+   },
+   {
+      "owner": "aharper",
+      "repository": "eatingsafe"
+   },
+   {
+      "owner": "jasonm",
+      "repository": "bricklet-core"
+   },
+   {
+      "owner": "enhiro",
+      "repository": "wp_theme_victoria"
+   },
+   {
+      "owner": "Judeqiu",
+      "repository": "testprj"
+   },
+   {
+      "owner": "sotirac",
+      "repository": "action_mailer_tls"
+   },
+   {
+      "owner": "RyanSpeaking",
+      "repository": "t-ch-y"
+   },
+   {
+      "owner": "fastman",
+      "repository": "biblioteka"
+   },
+   {
+      "owner": "bisho",
+      "repository": "wsdl-gen-for-php"
+   },
+   {
+      "owner": "drw",
+      "repository": "redo-py"
+   },
+   {
+      "owner": "mterenzio",
+      "repository": "gangbuster"
+   },
+   {
+      "owner": "taf2",
+      "repository": "sick"
+   },
+   {
+      "owner": "markofkin",
+      "repository": "patrick"
+   },
+   {
+      "owner": "bmxposer",
+      "repository": "alpha"
+   },
+   {
+      "owner": "krukow",
+      "repository": "tribook"
+   },
+   {
+      "owner": "pphetra",
+      "repository": "orangegears"
+   },
+   {
+      "owner": "tgdavies",
+      "repository": "calex"
+   },
+   {
+      "owner": "chipx86",
+      "repository": "git-vmware"
+   },
+   {
+      "owner": "skawaii",
+      "repository": "kettlecorn"
+   },
+   {
+      "owner": "prometheusxx",
+      "repository": "demokratia"
+   },
+   {
+      "owner": "chriseidhof",
+      "repository": "the-real-plazes"
+   },
+   {
+      "owner": "torstenschuenemann",
+      "repository": "testintorstengithub"
+   },
+   {
       "owner": "yarnpkg",
       "repository": "yarn"
    }

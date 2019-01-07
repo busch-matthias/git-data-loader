@@ -1,7 +1,7 @@
 import * as Octokit from '@octokit/rest';
 import * as moment from 'moment';
 
-import { FullConfiguration, saveResults } from './index'
+import { FullConfiguration, saveResults, saveTodos } from './index'
 import { RepositoryModel, Contributer, LanguageUsage, RepoIdentifier } from './model'
 import { getRateLimit } from './showlimit'
 
@@ -25,7 +25,7 @@ export class CrawlResult {
     saveRepo(repoId: RepoIdentifier, loaded: RepositoryModel): void {
         this.loadedRepos.push(loaded);
 
-        console.log("remove repo" + repoString(repoId) + "from todo")
+        //console.log("remove repo" + repoString(repoId) + " from todo")
         this.todoRepos.forEach((item, index) => {
 
             if ((item.owner === repoId.owner)
@@ -74,7 +74,7 @@ export async function crawlRepositories(
     let max = repos.length
     for (let currentId of repos) {
 
-        console.log(`----> Process Reop (${currentId.owner}/${currentId.repository}) #${i}/${max}`)
+        console.log(`----> Process  #${i}/${max}: (${currentId.owner}/${currentId.repository})`)
         i +=1;
         try {
             let loaded = await createModelFromResponse(currentId, gitApi, config)
@@ -88,13 +88,14 @@ export async function crawlRepositories(
                 console.log(`What ever happend...\n try to delete (${currentId.owner}/${currentId.repository}) from input. we still have ${remaining} calls`);
                 result.saveAsFishy(currentId)
             } else {
-                console.log("Will save current result")
+                console.log("Will stop and save current result")
                 return result;
             }
         }
         if(i%200 ==0){
             console.info('save temporary Result');
             saveResults(result, config);
+            saveTodos(result, config);
         }
 
     }
@@ -149,10 +150,11 @@ async function createContributors(repostoriy: RepoIdentifier,
     const contributerStats = response.data;
     //console.log("contributer:  " + JSON.stringify(contributerStats, null, 2))
     let result: Array<Contributer> = [];
-    if((contributerStats as any) === 'undefined'){
-        console.log('!! some thing funny happend: Repo has no contrib stats');
+    if(!contributerStats){
+        console.log('!! some thing funny happend: Repo ['+repostoriy.owner+'/'+repostoriy.repository+'] has no contrib stats');
         return [];
     }
+
     for (let i = 0; i < contributerStats.length; i++) {
         let contrib = contributerStats[i];
         result.push({
