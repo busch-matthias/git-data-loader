@@ -55,5 +55,40 @@ Do:
 
 
 
-# create repository model
+# cralw repositories
 
+The script uses a 2 step procedure to crawl the desired repositories.
+  1. First you generate a input-list witch holds all repository identifiers you want to cralw.
+  
+      *  At the moment you have to manually configure the desired search query in the code in the `generateInputFile`: `index.ts line:299`.
+
+      * Then use the following command to append the searched repositorys to your input file   
+        ```
+        npm run gen-input
+        ```
+        
+  2. If you generated the input file place it in the `input` folder and start the script with  
+      ```
+       npm run go
+      ```  
+     *  The script will now load all repositorys to the `output` folder. You can let the script run as it will save a temporary resoult every 200 loaded repositorys and will also wait and restart if your git hub api rate limit runs out.
+     *  The script will also write all unloaded repositorys to the `todo` file. That way the original `input` file won't be changed.
+     * There exist some repositorys wich can not be loaded. These repositorys will land in the `naughtyRepos.json`list.
+     
+  
+# generate datasets model
+
+The script will save the repository data into the `output.json` file.
+THen you can use 
+```
+npm run gen-analyticData
+```
+To generate the matrices for the apriori rule extraction.
+It will compute the most used config.MAX_HEADER_TOPICS topics and config.MAX_HEADER_LANG languages and then will check for each repository if it contains one of these topics / languages.
+It will create a `data.zip` wich you can then analyse with the R scripts.
+
+# Util
+Use the following command to see your git hub api rate limit and when it will refresh
+```
+npm run limit
+```
