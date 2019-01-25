@@ -1,5 +1,0 @@
-per_page: 100,
-                page: page,
-                q: 'created:2015-01-01..2016-01-01 topics:>1',
-                sort: 'stars',
-                order: 'desc'

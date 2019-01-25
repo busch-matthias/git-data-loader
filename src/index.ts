@@ -296,8 +296,8 @@ export async function generateInputFile(gitApi: Octokit, partialConfig: Configur
             const respone = await gitApi.search.repos({
                 per_page: 100,
                 page: page,
-                q: 'size:>20',
-                sort: 'updated',
+                q: 'language:java topics:>4',
+                sort: 'stars',
                 order: 'desc'
             });
             console.info('search yields to ' + respone.data.total_count + ' repos')

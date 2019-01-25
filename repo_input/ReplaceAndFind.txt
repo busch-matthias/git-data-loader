@@ -1,8 +1,0 @@
-"name":(.*)
-,{"repository":$1
-
-
-"login":(.*),
-"owner":$1}
-
-\s\s
